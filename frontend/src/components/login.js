@@ -1,39 +1,57 @@
 // import style1 from './login.module.css';
 import pict from "./logos/main_logo_v2.svg";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+// import { data } from "autoprefixer";
 
 const Login = () => {
+    const [loginInput, setLoginInput] = useState({email: "", password: "", userType: "user"})
+    const loginHandler = (e) => {
+        e.preventDefault()
+        console.log(loginInput);
+        fetch(`http://localhost:5000/api/${loginInput.userType}/login`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email: loginInput.email, password: loginInput.password})
+        }).then((data) => data.json() ).then((val) => {
+            localStorage.setItem("user", val)
+            console.log(val)
+        })
+    }
   return (
         <div className="grid grid-cols-2 h-screen">
     
             <div className="flex justify-center flex-col items-center">
                 <br/><br/>
-                <form className="flex flex-col justify-center place-items-center">
+                <form className="flex flex-col justify-center place-items-center" onSubmit={loginHandler}>
                 
                 <h1 className="text-4xl font-semibold mb-6" style = {{color: "rgb(19, 140, 214)"}}>Log in as {' '}
-                <select className="text-4xl form-select inline-block px-3 py-1.5 text-base font-semibold bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-current focus:bg-white focus:outline-none active:text-grey-700">
+                <select  value={loginInput.userType} onChange={(e) => {setLoginInput({...loginInput, userType: e.target.value})}} className="text-4xl form-select inline-block px-3 py-1.5 text-base font-semibold bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-current focus:bg-white focus:outline-none active:text-grey-700">
 
-                    <option selected className="text-3xl">User</option>
-                        <option className="text-3xl" value="Patient">Patient</option>
-                        <option className="text-3xl" value="Doctor">Doctor</option>
-                        <option className="text-3xl" value="Receptionist">Receptionist</option>
-                        <option className="text-3xl" value="Pharmacist">Pharmacist</option>
-                        <option className="text-3xl" value="Admin">Admin</option>
+                    <option className="text-3xl">User</option>
+                        <option className="text-3xl" value="patient">Patient</option>
+                        <option className="text-3xl" value="doctor">Doctor</option>
+                        <option className="text-3xl" value="receptionist">Receptionist</option>
+                        <option className="text-3xl" value="pharmacist">Pharmacist</option>
+                        <option className="text-3xl" value="admin">Admin</option>
                 </select> </h1>
                 <br/>
                 
                 <input type = "text" placeholder = "Email" className ="block w-full px-4
                 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 
                 rounded transition duration-300 ease-in-out m-0 focus:text-gray-700 focus:bg-[#dbf0fe] focus:border-[#dbf0fe] 
-                focus:outline-none"/><br/>
+                focus:outline-none" value={loginInput.email} onChange={(e) => {setLoginInput({...loginInput, email: e.target.value})}}/><br/>
                 
                 <input type = "text" id = "password" placeholder="Password" className ="block w-full px-4
                 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 
                 rounded transition duration-300 ease-in-out m-0 focus:text-gray-700 focus:bg-[#dbf0fe] focus:border-[#dbf0fe] 
-                focus:outline-none"/>
+                focus:outline-none" value={loginInput.password} onChange={(e) => {setLoginInput({...loginInput, password: e.target.value})}}/>
                 <br/>
 {/*                 
                 <span>Forgot password? Click </span>
