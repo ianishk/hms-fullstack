@@ -1,0 +1,22 @@
+POST http://localhost:5000/api/rooms/room
+Content-Type: "application/json"
+
+{
+    "roomNo":"100",
+    "block": "B",
+    "pricePerDay":"1000"
+}
+
+###
+
+POST http://localhost:5000/api/receptionist/signup/
+Content-Type: application/json
+
+{
+    "name": "test",
+    "email":"abs@test.com",
+    "password":"123456",
+    "age": "18",
+    "phone": "1234543",
+    "address": "india"
+}

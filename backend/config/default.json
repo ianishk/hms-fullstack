@@ -1,0 +1,4 @@
+{
+    "mongoURI":"mongodb+srv://harshit:harshit12345@cluster0.yzg7kgr.mongodb.net/?retryWrites=true&w=majority",
+    "jwttoken":"123456"
+}
