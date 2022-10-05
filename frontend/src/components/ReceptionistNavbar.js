@@ -2,6 +2,9 @@ import React from 'react'
 import pictblack from "./logos/main_logo_black.svg";
 import { Link } from "react-router-dom";
 export default function ReceptionistNavbar() {
+    const onclick=()=>{
+        localStorage.removeItem('user');
+    }
   return (
     <nav className="bg-gray-100 relative flex flex-wrap items-center justify-between px-2 py-2 mx-0 transition-all shadow-none duration-250 ease-soft-in lg:flex-nowrap lg:justify-start">
                 <div className="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
@@ -36,7 +39,9 @@ export default function ReceptionistNavbar() {
                             <Link to="/receptionist/EditReceptionist">Update Profile</Link>
                         </li>
                         <li>
-                        <button className="ml-[540px] bg-white rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">LOGOUT</button>
+                        <button onClick={()=>onclick()} className="ml-[540px] bg-white rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">
+                            <Link to="/login">LOGOUT</Link>
+                        </button>
                         </li>
                     </ul>
                     
