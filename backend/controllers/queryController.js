@@ -14,8 +14,8 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { query } = req.body;
-    const patientId = req.user.id;
+    let { query } = req.body;
+    let patientId = req.user.id;
 
     try {
       let room = await Query.findOne({ query });
