@@ -20,7 +20,7 @@ const Login = () => {
             },
             body: JSON.stringify({email: loginInput.email, password: loginInput.password})
         }).then((data) => data.json() ).then((val) => {
-            localStorage.setItem("user", val)
+            localStorage.setItem("user", JSON.stringify(val))
             console.log(val)
         })
     }

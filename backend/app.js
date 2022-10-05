@@ -18,7 +18,7 @@ app.use('/api/receptionist',require('./controllers/receptionistControllers'));
 
 app.use('/api/rooms',require('./controllers/roomController'));
 app.use('/api/queries',require('./controllers/queryController'));
-
+app.use('/api/patient',require('./controllers/patientControllers'));
 app.use('/api/medicine',require('./controllers/medicineController'));
 app.use('/api/doctor',require('./controllers/doctorControllers'));
 

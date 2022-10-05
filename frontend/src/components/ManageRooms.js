@@ -1,11 +1,17 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 const ManageRooms = () => {
   const location = useLocation();
   console.log(location);
   const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
-  console.log(l);  
+  console.log(l); 
+  const [rooms,setRooms]=useState([]);
+  useEffect(()=>{
+    fetch(`http://localhost:5000/api/rooms`,{headers:{'Content-Type':'application/json','x-auth-token':JSON.parse(localStorage.user).token}}).then((data) => data.json() ).then((val) => {
+      setRooms(val);
+    })
+  },[])
   const data ={
     
         "Rooms" :[
@@ -60,7 +66,7 @@ const ManageRooms = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        {data.Rooms.map((item, i) => (
+                        {rooms.map((item, i) => (
                         
                             //  <td>{item.name}</td> 
                             
@@ -69,18 +75,18 @@ const ManageRooms = () => {
                                 <td className="p-0 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                 <div className="flex px-2 py-1">
                                     <div className="flex flex-col justify-center">
-                                    <h6 className="mb-0 leading-normal text-sm">{item.id}</h6>
+                                    <h6 className="mb-0 leading-normal text-sm">{item._id}</h6>
                                     </div>
                                 </div>
                                 </td>
                                 <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <h6 className="mb-0 leading-normal text-sm">{item.roomno}</h6>
+                                <h6 className="mb-0 leading-normal text-sm">{item.roomNo}</h6>
                                 </td>
                                 <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                 <h6 className="mb-0 leading-normal text-sm">{item.block}</h6>
                                 </td>
                                 <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <h6 className="mb-0 leading-normal text-sm">{item.pricepday}</h6>
+                                <h6 className="mb-0 leading-normal text-sm">{item.pricePerDay}</h6>
                                 </td>
                                 <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
                                 <Link to={"/"+l+"/EditRooms"} className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>

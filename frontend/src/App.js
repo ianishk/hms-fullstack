@@ -33,6 +33,8 @@ import InpatientPage from "./pages/InpatientPage";
 import OutpatientPage from "./pages/OutpatientPage";
 import PharmacistPage from "./pages/PharmacistPage";
 import ReceptionistPage from "./pages/ReceptionistPage";
+import setAuthToken from './utils/setAuthToken';
+
 function App() {
   return (
   <>

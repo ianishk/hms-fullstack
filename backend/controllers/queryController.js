@@ -38,7 +38,7 @@ router.post(
   }
 );
 
-router.get("/", auth, async (req, res) => {
+router.get("/",auth,  async (req, res) => {
   try {
     const queries = await Query.find();
     res.status(200).json(queries);
