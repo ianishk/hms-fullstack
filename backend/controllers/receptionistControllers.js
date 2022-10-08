@@ -112,7 +112,7 @@ router.post('/update',
     async (req,res)=>{
         const errors=validationResult(req);
         if(!errors.isEmpty())return res.status(400).json({errors:errors.array()});
-        const {name,age,phone}=req.body;
+        const {name,age,phone,address}=req.body;
         try {
             // const receptionist=Receptionist.findById({id:req.params.receptionist_id});
             // if(!receptionist)return res.status(400).res({msg:'No User found'});
@@ -121,6 +121,7 @@ router.post('/update',
             fields.name=name;
             fields.age=age;
             fields.phone=phone;
+            fields.address=address;
             let receptionist=await Receptionist.findOneAndUpdate(
                 {user:req.user.id},
                 {$set:fields},

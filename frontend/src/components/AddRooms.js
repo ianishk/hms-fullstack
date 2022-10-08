@@ -1,12 +1,33 @@
 
 import pict from "./logos/main_logo_v2.svg";
 import pictblack from "./logos/main_logo_black.svg";
-import React from "react";
+import React,{useState} from "react";
 import { Link } from "react-router-dom";
 
 const AddRooms = () => {
-    const data ={
-        
+    const [formData,setFormData]=useState({
+        roomNo:"",
+        block:"",
+        pricePerDay:"",
+    });
+
+    const onchange=(e)=>{
+        setFormData({...formData,[e.target.name]:e.target.value});
+        console.log(formData);
+    }
+
+    const onsubmit=(e)=>{
+        e.preventDefault();
+        fetch(`http://localhost:5000/api/rooms/room`, {
+            method: "POST",
+            headers: {
+                'x-auth-token':JSON.parse(localStorage.user).token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        }).then((data) => data.json() ).then((val) => {
+            console.log(val);
+        })
     }
   return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
@@ -14,7 +35,7 @@ const AddRooms = () => {
             <div className="w-full px-6 py-6 mx-auto">
 
             
-                <form className="flex flex-col justify-center place-items-center">
+                <form className="flex flex-col justify-center place-items-center" onSubmit={(e)=>onsubmit(e)}>
                     
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -22,7 +43,10 @@ const AddRooms = () => {
                             Room Number
                             </label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
-                            mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-roomno" type="text" placeholder="22"/>
+                            mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-roomno" type="text" placeholder="22"
+                            name='roomNo'
+                            onChange={e=>onchange(e)}
+                            />
                         </div>
                         <div className="w-full md:w-1/2 px-3">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-block">
@@ -30,7 +54,8 @@ const AddRooms = () => {
                             </label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
                             leading-tight focus:outline-none focus:bg-white focus:border-gray-400" id="grid-block" type="text" 
-                            placeholder="A"/>
+                            name='block'
+                            onChange={e=>onchange(e)}/>
                         </div> 
                     </div>
 
@@ -40,7 +65,8 @@ const AddRooms = () => {
                         </label>
                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
                         rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-pricepday" type="text" 
-                        placeholder="500"/><br/>
+                        name='pricePerDay'
+                        onChange={e=>onchange(e)}/><br/>
                     </div>
                 
                 <br/>

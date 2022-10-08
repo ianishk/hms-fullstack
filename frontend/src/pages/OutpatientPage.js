@@ -11,7 +11,15 @@ import AddAppointmentPatient from '../components/AddAppointmentPatient'
 const OutpatientPage = () => {
     const location = useLocation()
     console.log(location.pathname)
-
+    let data ={
+      "Prescription" :[
+        {
+          "name":"John Doe",
+          "medicine":"Crocin 500mg",
+          "instructions":"0-1-1 after food"
+        }
+        ]
+    }
     const findComponent = () => { 
         if(location.pathname === "/outpatient/EditOutpatient"){
             return <EditOutpatient />
@@ -23,10 +31,10 @@ const OutpatientPage = () => {
           return <AddQueryP />
         }
         else if(location.pathname === "/outpatient/ViewPrescription" ){
-          return <ViewPrescription />
+          return <ViewPrescription data={data}/>
         }
         else if(location.pathname === "/outpatient/ViewAppointment" ){
-          return <ViewAppointment />
+          return <ViewAppointment  />
         }
         else if(location.pathname === "/outpatient/AddAppointmentPatient" ){
           return <AddAppointmentPatient/>

@@ -20,7 +20,7 @@ router.post(
     const { roomNo, block, pricePerDay } = req.body;
 
     try {
-      let room = await Room.findOne({ roomNo });
+      let room = await Room.findOne({ roomNo,block });
       if (room) {
         return res
           .status(400)
@@ -67,9 +67,9 @@ router.get("/:room_no", auth, async (req, res) => {
 //   }
 // );
 
-router.delete("/:room_no", auth, async (req, res) => {
+router.delete("/:room_id", auth, async (req, res) => {
   try {
-    await Room.findOneAndDelete({ roomNo: req.params.room_no });
+    await Room.findOneAndDelete({ _id: req.params.room_id });
     res.json({ msg: "Room deleted successfully." });
   } catch (err) {
     console.log(err);

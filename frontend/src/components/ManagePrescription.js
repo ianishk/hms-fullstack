@@ -7,24 +7,17 @@ const ManagePrescription = () => {
   const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
   console.log(l);    
   const data ={
-    
       "Prescription" :[
         {
           "name":"John Doe",
           "medicine":"Crocin 500mg",
           "instructions":"0-1-1 after food"
         }
-         
         ]
       }
     return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
-
-
-
         <div className="w-full px-6 py-6 mx-auto">
-
-
             <div className="flex flex-wrap -mx-3">
             <div className="flex-none w-full max-w-full px-3">
                 <div className="relative flex flex-col min-w-0 mb-6 break-words bg-white pb-6 border-1 border-black border-solid shadow-soft-xl rounded bg-clip-border">

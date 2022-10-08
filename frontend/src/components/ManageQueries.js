@@ -12,7 +12,7 @@ const ManageQueries = () => {
       })
   },[])
   
-  console.log(query);
+//   console.log(query);
   // console.log(location);
   const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
   // console.log(l);
@@ -40,9 +40,9 @@ const ManageQueries = () => {
          
   //       ]
   //     }
-    const deleteQuery=()=>{
+    const deleteQuery=(id)=>{
         console.log('qweqwe');
-        fetch(`http://localhost:5000/api/queries/query`, {
+        fetch(`http://localhost:5000/api/queries/${id}`, {
             method: "DELETE",
             headers: {
                 'x-auth-token':JSON.parse(localStorage.user).token,
@@ -101,8 +101,8 @@ const ManageQueries = () => {
                                 <h6 className="mb-0 leading-normal text-sm">{item.query}</h6>
                                 </td>
                                 <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <Link to={"/"+l+"/EditQuery"}  className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>
-                                <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" onClick={()=>deleteQuery()}> Delete </button>
+                                <Link to={"/"+l+"/EditQuery"}  className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" > Edit </Link>
+                                <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" onClick={()=>deleteQuery(item._id)}> Delete </button>
                                 </td>
                             </tr>
                         
