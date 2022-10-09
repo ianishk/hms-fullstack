@@ -49,6 +49,16 @@ router.post('/signup',
         }
     });
 
+
+router.get('/',async(req,res)=>{
+    try {
+        const doctor=await Doctor.find();
+        res.json(doctor);
+    } catch (err) {
+        console.log(err.message);
+    }
+})
+
 router.post('/login',
     check('email','email is required').isEmail(),
     check('password','password is required').notEmpty(),
@@ -84,14 +94,14 @@ router.post('/login',
 
 router.get('/:doctor_id',auth,async (req,res)=>{
     try {
-        const doctor=await Doctor.findById(req.user.id).select('-password');
+        const doctor=await Doctor.findById(req.params.doctor_id).select('-password');
         res.json(doctor);
     } catch (err) {
         console.log(err.message);
     }
 })
 
-router.delete('/:doctor_id',auth,async (req,res)=>{
+router.delete('/:doctor_id',async (req,res)=>{
     try {
         await Doctor.findOneAndRemove({id:req.params.doctor_id});
         res.json({msg:'User removed'});

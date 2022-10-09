@@ -97,7 +97,7 @@ router.post('/login',
         }
     })
 
-router.delete('/:receptionist_id',auth,async (req,res)=>{
+router.delete('/:receptionist_id',async (req,res)=>{
     try {
         await Receptionist.findOneAndRemove({id:req.params.receptionist_id});
         res.json({msg:'User removed'});
@@ -133,5 +133,14 @@ router.post('/update',
             console.log(error.message);
         }
         
+    })
+
+router.get('/',async(req,res)=>{
+        try {
+            const receptionist=await Receptionist.find();
+            res.json(receptionist);
+        } catch (err) {
+            console.log(err.message);
+        }
     })
 module.exports=router;
