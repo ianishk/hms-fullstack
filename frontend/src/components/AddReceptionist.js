@@ -19,7 +19,7 @@ const AddReceptionist = () => {
     }
     const onsubmit=(e)=>{
         e.preventDefault();
-        fetch(`http://localhost:5000/api/doctor/signup`, {
+        fetch(`http://localhost:5000/api/receptionist/signup`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

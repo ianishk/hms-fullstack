@@ -9,7 +9,7 @@ const auth=require('../middleware/auth');
 const Medicine=require('../models/medicine');
 
 router.post('/',
-    auth,
+    // auth,
     check('name','name required').notEmpty(),
     check('description','Description Required').notEmpty(),
     check('count','Count required').notEmpty(),
@@ -30,7 +30,7 @@ router.post('/',
         }
     })
 
-router.get('/',auth,async (req,res)=>{
+router.get('/',async (req,res)=>{
     try {
         const medicines=await Medicine.find();
         res.json(medicines);    
@@ -49,7 +49,9 @@ router.get('/:medicine_id',auth,async(req,res)=>{
     }
 })
 
-router.delete('/:medicine_id',auth,async(req,res)=>{
+router.delete('/:medicine_id',
+// auth,
+async(req,res)=>{
     try {
         const medicine=await Medicine.findByIdAndRemove({_id:req.params.medicine_id});
         if(!medicine)return res.status(400).json({error:[{msg:'Invalid ID'}]});

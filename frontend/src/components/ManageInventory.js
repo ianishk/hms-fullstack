@@ -1,49 +1,64 @@
 
 import pict from "./logos/main_logo_v2.svg";
 import pictblack from "./logos/main_logo_black.svg";
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 const ManageInventory = () => {
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
-  console.log(l);  
-  const data ={
+  // console.log(l);  
+  const [medicine,setmedicine]=useState([]);
+    useEffect(()=>{
+        fetch(`http://localhost:5000/api/medicine`,{headers:{'Content-Type':'application/json'}}).then((data) => data.json() ).then((val) => {
+          setmedicine(val);
+        })
+    },[]);
+    // console.log(medicine);
+  // const data ={
     
-        "Inventory" :[
-          {
-            "id":"1",
-            "name":"crocin",
-            "count":"250",
-            "description":"fever, headache"
-          },
-          {
-            "id":"2",
-            "name":"Dolo",
-            "count":"400",
-            "description":"fever, headache"
-          },
-          {
-            "id":"3",
-            "name":"Cough syrup",
-            "count":"298",
-            "description":"cough"
-          },
-          {
-            "id":"4",
-            "name":"Allegra",
-            "count":"197",
-            "description":"allergy"
-          },
-          {
-            "id":"5",
-            "name":"Cetrizine",
-            "count":"220",
-            "description":"cold,congestion"
-          },
-        ]
-      }
+  //       "Inventory" :[
+  //         {
+  //           "id":"1",
+  //           "name":"crocin",
+  //           "count":"250",
+  //           "description":"fever, headache"
+  //         },
+  //         {
+  //           "id":"2",
+  //           "name":"Dolo",
+  //           "count":"400",
+  //           "description":"fever, headache"
+  //         },
+  //         {
+  //           "id":"3",
+  //           "name":"Cough syrup",
+  //           "count":"298",
+  //           "description":"cough"
+  //         },
+  //         {
+  //           "id":"4",
+  //           "name":"Allegra",
+  //           "count":"197",
+  //           "description":"allergy"
+  //         },
+  //         {
+  //           "id":"5",
+  //           "name":"Cetrizine",
+  //           "count":"220",
+  //           "description":"cold,congestion"
+  //         },
+  //       ]
+  //     }
+  const deleteMedicine=(id)=>{
+    // console.log('qweqwe');
+    fetch(`http://localhost:5000/api/medicine/${id}`, {
+        method: "DELETE"
+    }).then((data) => data.json() ).then((val) => {
+        console.log(val);
+    })
+}
   return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
 
@@ -72,7 +87,7 @@ const ManageInventory = () => {
                             </tr>
                             </thead>
                             <tbody>
-                            {data.Inventory.map((item, i) => (
+                            {medicine.map((item, i) => (
                             
                                 //  <td>{item.name}</td> 
                                 
@@ -81,7 +96,7 @@ const ManageInventory = () => {
                                     <td className="p-1 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <div className="flex px-2 py-1">
                                         <div className="flex flex-col justify-center">
-                                        <h6 className="mb-0 leading-normal text-sm">{item.id}</h6>
+                                        <h6 className="mb-0 leading-normal text-sm">{item._id}</h6>
                                         </div>
                                     </div>
                                     </td>
@@ -96,7 +111,7 @@ const ManageInventory = () => {
                                     </td>
                                     <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <Link to={"/"+l+"/EditInventory"}  className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>
-                                    <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Delete </button>
+                                    <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" onClick={()=>deleteMedicine(item._id)}> Delete </button>
                                     </td>
                                 </tr>
                             

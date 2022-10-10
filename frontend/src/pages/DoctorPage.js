@@ -14,7 +14,7 @@ import ManageOutpatient from '../components/ManageOutpatient'
 import ManagePrescription from '../components/ManagePrescription'
 function DoctorPage() {
     const location = useLocation()
-    console.log(location.pathname)
+    // console.log(location.pathname)
 
     const findComponent = () => { 
         if(location.pathname === "/doctor/ManageAppointments"){
