@@ -58,12 +58,22 @@ router.get("/:query_id", auth, async (req, res) => {
 
 router.post(
   "/:query_id",
-  auth,
+  // auth,
   check('status','Status should be of type boolean').isBoolean().notEmpty(),
   async (req, res) => {
-    let status = req.body.status;
+    // let status = req.body.status;
+    const {patient,query,status}=req.body;
+    const fields={};
+    fields.query=query;
+    fields.status=status;
+    fields.patient=patient;
     try{
-        let r = await Query.findOneAndUpdate({_id: req.params.query_id},{status});
+        // let r = await Query.findOneAndUpdate({_id: req.params.query_id},{status});
+        let r = await Query.findOneAndUpdate(
+          {_id: req.params.query_id},
+          {$set:fields},
+          {new: true}
+        );
         res.status(200).json({msg:"Updated successfully"})
     }
     catch(err){

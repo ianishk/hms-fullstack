@@ -3,26 +3,65 @@ import pict from "./logos/main_logo_v2.svg";
 import pictblack from "./logos/main_logo_black.svg";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const EditQuery = () => {
-    const data ={
+    const location = useLocation()
+    const { id } = location.state
+    console.log(id)
+    // const data ={
     
-        "Queries" :[
-          {
-            "id":"1",
-            "patient":"John",
-            "query":"Can I",
-            "status":"True"
-          }
-        ]
-      }
+    //     "Queries" :[
+    //       {
+    //         "id":"1",
+    //         "patient":"John",
+    //         "query":"Can I",
+    //         "status":"True"
+    //       }
+    //     ]
+    //   }
+      const [formData,setFormData]=useState({
+        patient:'',
+        query:'',
+        status:'',
+    });
+    const [data,setData]=useState([]);
+    useEffect(()=>{
+        fetch(`http://localhost:5000/api/queries`,{headers:{'Content-Type':'application/json','x-auth-token':JSON.parse(localStorage.user).token}}).then((data) => data.json() ).then((val) => {
+          setData(val);
+        })
+    },[])
+    console.log(data);
+    const onchange=(e)=>{
+        setFormData({...formData,[e.target.name]:e.target.value});
+        
+    }
+
+    const onsubmit=(e)=>{
+        
+        e.preventDefault();
+    fetch(`http://localhost:5000/api/queries/633d62c914c7fcbe3e2ad010`, {
+            method: "POST",
+            headers: {
+                // 'x-auth-token':JSON.parse(localStorage.user).token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        }).then((data) => data.json() ).then((val) => {
+            console.log(val);
+            
+        })
+    }
+
   return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
 
             <div className="w-full px-6 py-6 mx-auto">
 
-             {data.Queries.map((item, i) => (
-                <form className="flex flex-col justify-center place-items-center">
+             {data.map((item, i) => (
+                <form className="flex flex-col justify-center place-items-center" onSubmit={(e)=>onsubmit(e)}>
                     
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -30,7 +69,7 @@ const EditQuery = () => {
                             ID
                             </label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded 
-                            py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-id" type="text" value={item.id}/>
+                            py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-id" type="text" value={id}/>
                         </div>
                         <div className="w-full md:w-1/2 px-3">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-patient">
@@ -38,7 +77,7 @@ const EditQuery = () => {
                             </label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
                             leading-tight focus:outline-none focus:bg-white focus:border-gray-400" id="grid-patient" type="text" 
-                            placeholder={item.patient}/>
+                            placeholder={item.patient} name="patient" onChange={e=>onchange(e)}/>
                         </div>
                     </div>
                     
@@ -48,7 +87,7 @@ const EditQuery = () => {
                         </label>
                         <textarea rows="4" className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
                         rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-query" type="text" 
-                        placeholder={item.query}/>
+                        placeholder={item.query} name="query" onChange={e=>onchange(e)}/>
                     </div> <br/>
                     <div className="w-full md:w-[30rem] px-3 mb-6 md:mb-0">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-status">
@@ -56,7 +95,7 @@ const EditQuery = () => {
                             </label>
                             <select className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
                             leading-tight focus:outline-none focus:bg-white focus:border-gray-400" id="grid-status" type="text" 
-                            placeholder="False">
+                            placeholder="False" name="status" onChange={e=>onchange(e)}>
                                 <option value="True">True</option>
                                 <option value="False">False</option>
                             </select>

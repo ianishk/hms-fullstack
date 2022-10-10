@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
+import EditQuery from './EditQuery';
 const ManageQueries = () => {
   const location = useLocation();
   const [query,setQuery]=useState([]);
@@ -90,7 +90,7 @@ const ManageQueries = () => {
                                 <td className="p-0 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                 <div className="flex px-2 py-1">
                                     <div className="flex flex-col justify-center">
-                                    <h6 className="mb-0 leading-normal text-sm">{item.patient}</h6>
+                                    <h6 className="mb-0 leading-normal text-sm">{item._id}</h6>
                                     </div>
                                 </div>
                                 </td>
@@ -101,7 +101,7 @@ const ManageQueries = () => {
                                 <h6 className="mb-0 leading-normal text-sm">{item.query}</h6>
                                 </td>
                                 <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <Link to={"/"+l+"/EditQuery"}  className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" > Edit </Link>
+                                <Link to={"/"+l+"/EditQuery"}  state={{ id:item._id}} className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" > Edit </Link>
                                 <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" onClick={()=>deleteQuery(item._id)}> Delete </button>
                                 </td>
                             </tr>
