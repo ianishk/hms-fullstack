@@ -21,9 +21,10 @@ app.use('/api/queries',require('./controllers/queryController'));
 app.use('/api/patient',require('./controllers/patientControllers'));
 app.use('/api/medicine',require('./controllers/medicineController'));
 app.use('/api/doctor',require('./controllers/doctorControllers'));
+app.use('/api/pharmacist',require('./controllers/pharmacistControllers'))
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => { 
+app.listen(port, () => {
     console.log(`connected to port ${port}`)
 })

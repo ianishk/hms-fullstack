@@ -3,7 +3,7 @@ const { check, validationResult } = require('express-validator');
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 const config=require('config');
-const Patient = require("../models/patient");
+const Patient = require("../models/inpatient");
 const router = express.Router();
 
 router.post("/login", (req, res) => {
