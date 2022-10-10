@@ -48,6 +48,16 @@ router.post('/signup',
             console.log(error.message);
         }
     });
+
+router.get('/',async (req,res)=>{
+        try {
+            const pharmacist=await Pharmacist.find();
+            res.json(pharmacist);    
+        } catch (error) {
+            console.log(error.message);
+        }
+    });
+
 router.post('/login',
     check('email','email is required').isEmail(),
     check('password','password is required').notEmpty(),

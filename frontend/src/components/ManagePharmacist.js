@@ -1,64 +1,81 @@
 
 import pict from "./logos/main_logo_v2.svg";
 import pictblack from "./logos/main_logo_black.svg";
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 const ManagePharmacist = () => {
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
-  console.log(l);  
-  const data ={
+  // console.log(l);  
+
+  const [pharmacist,setPharmacist]=useState([]);
+  // console.log(JSON.parse(localStorage.user).token);
+  useEffect(()=>{
+      fetch(`http://localhost:5000/api/pharmacist`,{headers:{'Content-Type':'application/json','x-auth-token':JSON.parse(localStorage.user).token}}).then((data) => data.json() ).then((val) => {
+        setPharmacist(val);
+      })
+  },[])
+  // console.log(pharmacist)
+  const deletePharmacist=(id)=>{
+    console.log('qweqwe');
+    fetch(`http://localhost:5000/api/pharmacist/${id}`, {
+        method: "DELETE"
+    }).then((data) => data.json() ).then((val) => {
+        console.log(val);
+    })
+}
+  // const data ={
     
-        "Pharmacist" :[
-          {
-            "id":"122",
-            "name":"John",
-            "last_name":"Doe",
-            "email":"j@gmail.com",
-            "age":"25",
-            "contact":"1234567890",
-            "address":"Xyz-street"
-          },
-          {
-            "id":"123",
-            "name":"Jack",
-            "last_name":"black",
-            "email":"jb@gmail.com",
-            "age":"27",
-            "contact":"1244567890",
-            "address":"Xyz-street"
-          },
-          {
-            "id":"124",
-            "name":"Jennny",
-            "last_name":"Day",
-            "email":"jd@gmail.com",
-            "age":"26",
-            "contact":"1234557890",
-            "address":"Xyz-street"
-          },
-          {
-            "id":"122",
-            "name":"John",
-            "last_name":"Doe",
-            "email":"j@gmail.com",
-            "age":"25",
-            "contact":"1234567890",
-            "address":"Xyz-street"
-          },
-          {
-            "id":"122",
-            "name":"John",
-            "last_name":"Doe",
-            "email":"j@gmail.com",
-            "age":"25",
-            "contact":"1234567890",
-            "address":"Xyz-street"
-          },
-        ]
-      }
+  //       "Pharmacist" :[
+  //         {
+  //           "id":"122",
+  //           "name":"John",
+  //           "last_name":"Doe",
+  //           "email":"j@gmail.com",
+  //           "age":"25",
+  //           "contact":"1234567890",
+  //           "address":"Xyz-street"
+  //         },
+  //         {
+  //           "id":"123",
+  //           "name":"Jack",
+  //           "last_name":"black",
+  //           "email":"jb@gmail.com",
+  //           "age":"27",
+  //           "contact":"1244567890",
+  //           "address":"Xyz-street"
+  //         },
+  //         {
+  //           "id":"124",
+  //           "name":"Jennny",
+  //           "last_name":"Day",
+  //           "email":"jd@gmail.com",
+  //           "age":"26",
+  //           "contact":"1234557890",
+  //           "address":"Xyz-street"
+  //         },
+  //         {
+  //           "id":"122",
+  //           "name":"John",
+  //           "last_name":"Doe",
+  //           "email":"j@gmail.com",
+  //           "age":"25",
+  //           "contact":"1234567890",
+  //           "address":"Xyz-street"
+  //         },
+  //         {
+  //           "id":"122",
+  //           "name":"John",
+  //           "last_name":"Doe",
+  //           "email":"j@gmail.com",
+  //           "age":"25",
+  //           "contact":"1234567890",
+  //           "address":"Xyz-street"
+  //         },
+  //       ]
+  //     }
   return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
 
@@ -89,7 +106,7 @@ const ManagePharmacist = () => {
                             </tr>
                             </thead>
                             <tbody>
-                            {data.Pharmacist.map((item, i) => (
+                            {pharmacist.map((item, i) => (
                             
                                 //  <td>{item.name}</td> 
                                 
@@ -98,7 +115,7 @@ const ManagePharmacist = () => {
                                     <td className="p-0 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <div className="flex px-2 py-1">
                                         <div className="flex flex-col justify-center">
-                                        <h6 className="mb-0 leading-normal text-sm">{item.id}</h6>
+                                        <h6 className="mb-0 leading-normal text-sm">{item._id}</h6>
                                         </div>
                                     </div>
                                     </td>
@@ -119,7 +136,7 @@ const ManagePharmacist = () => {
                                     </td>
                                     <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <Link to={"/"+l+"/EditPharmacist"}  className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>
-                                    <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Delete </button>
+                                    <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" onClick={()=>deletePharmacist(item._id)}> Delete </button>
                                     </td>
                                 </tr>
                             
