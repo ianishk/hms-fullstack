@@ -27,11 +27,9 @@ const inPatientSchema = mongoose.Schema({
       values: ["male", "female", "other"],
       message: "{VALUE} is not a valid entry for Gender attribute",
     },
-    required: true,
   },
-  phoneNo: {
+  phone: {
     type: String,
-    required: true,
     unique: true,
   },
   address: {
