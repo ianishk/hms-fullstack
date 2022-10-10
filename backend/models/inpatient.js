@@ -41,8 +41,7 @@ const inPatientSchema = mongoose.Schema({
     default: new Date(),
   },
   bookedRooms: {
-    type: [],
-    default: []
+    type: Number,
   }
 });
 
