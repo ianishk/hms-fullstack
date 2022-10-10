@@ -1,25 +1,22 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import PrescriptionRecords from './PrescriptionRecords';
-const ViewPrescription = ({data}) => {
+const ManageBill = () => {
   const location = useLocation();
-//   console.log(location);
-  const [search,setSearch]=useState('');
-  const [newData,setNewData]=useState(data.Prescription);
+  console.log(location);
   const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
-//   console.log(l);    
-    const onchange=(e)=>{
-        setSearch(e.target.value);
-    }
-    //Checks whether the name matches or not
-    const onsubmit=(e)=>{
-        e.preventDefault();
-        const res=data.Prescription.filter(item=>{
-            return item.name.toLowerCase()===search.toLowerCase();
-        });
-        setNewData(res);
-    }
+  console.log(l);    
+  const data ={
+    
+    "Bill" :[
+      {
+        "name":"John",
+        "cost":"500",
+        "status":"False"
+      }
+    ]
+  }  
+
     return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
 
@@ -34,11 +31,8 @@ const ViewPrescription = ({data}) => {
                 <div className="p-2 pb-0 mb-0 bg-white border-1 border-b-solid rounded border-black">
                     <h6 className="text-2xl uppercase">Prescriptions</h6>
                     <br/>
-                    <form onSubmit={e=>onsubmit(e)}>
-                        <input className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300" placeholder="Enter Name" type='text' onChange={e=>onchange(e)} name='name'/>
-                        <button className="ml-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" type='submit'>Search</button>
-                    </form>
-                 </div>
+                    <Link to={"/"+l+"/AddBill"} className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">ADD</Link>
+                </div>
                 <br/>
                 <div className="flex-auto px-0 pt-0 pb-2">
                     <div className="p-0 overflow-x-auto">
@@ -47,13 +41,13 @@ const ViewPrescription = ({data}) => {
                         <tr>
                             <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Serial No.</th>
                             <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Patient Name</th>
-                            <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Medicines</th>
-                            <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Instructions</th>
+                            <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Cost</th>
+                            <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Status</th>
                             <th className="px-2 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none text-m tracking-none whitespace-nowrap text-grey-400 opacity-70"></th>
                         </tr>
                         </thead>
-                        {/* <tbody>
-                        {data.Prescription.map((item, i) => (
+                        <tbody>
+                        {data.Bill.map((item, i) => (
                         
                             //  <td>{item.name}</td> 
                             
@@ -70,19 +64,19 @@ const ViewPrescription = ({data}) => {
                                 <h6 className="mb-0 leading-normal text-sm">{item.name}</h6>
                                 </td>
                                 <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <h6 className="mb-0 leading-normal text-sm">{item.medicine}</h6>
+                                <h6 className="mb-0 leading-normal text-sm">{item.cost}</h6>
                                 </td>
                                 <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <h6 className="mb-0 leading-normal text-sm">{item.instructions}</h6>
+                                <h6 className="mb-0 leading-normal text-sm">{item.status}</h6>
                                 </td>
                                 <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                <Link to={"/"+l+"/EditBill"}  className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>
+                                <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Delete </button>
                                 </td>
                             </tr>
                         
                       ))}
-                        </tbody> */}
-                        
-                        <PrescriptionRecords data={newData}/>
+                        </tbody>
                     </table>
                     </div>
                 </div>
@@ -96,4 +90,4 @@ const ViewPrescription = ({data}) => {
   )
 }
 
-export default ViewPrescription;
+export default ManageBill;

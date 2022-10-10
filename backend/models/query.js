@@ -4,7 +4,7 @@ const {ObjectId} = Schema.Types;
 
 const query = Schema({
     patient: {
-        type: ObjectId,
+        type: String,
         ref: 'Patient',
         required: true
     },

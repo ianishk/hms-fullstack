@@ -63,10 +63,24 @@ router.post(
   async (req, res) => {
     // let status = req.body.status;
     const {patient,query,status}=req.body;
+    console.log("req.body")
     const fields={};
-    fields.query=query;
-    fields.status=status;
-    fields.patient=patient;
+    if(query.length != 0 )
+    {
+      fields.query=query;
+    }
+    if(patient.length != 0)
+    {
+      fields.patient=patient;
+    }
+    if(status ==="false")
+    {
+      fields.status=false
+    }
+    if(status ==="true"){
+      fields.status=true
+    }
+    console.log(fields.query)
     try{
         // let r = await Query.findOneAndUpdate({_id: req.params.query_id},{status});
         let r = await Query.findOneAndUpdate(

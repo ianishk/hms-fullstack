@@ -15,6 +15,9 @@ import AddAppointment from '../components/AddAppointment'
 import AddQuery from '../components/AddQuery'
 import AddRooms from '../components/AddRooms'
 import AddRoom from '../components/AddRoom'
+import AddBill from '../components/AddBill'
+import ManageBill from '../components/ManageBill'
+import EditBill from '../components/EditBill'
 
 function ReceptionistPage() {
     const location = useLocation()
@@ -59,6 +62,15 @@ function ReceptionistPage() {
         }
         else if(location.pathname === "/receptionist/AddRoom" ){
             return <AddRoom />
+        }
+        else if(location.pathname === "/receptionist/AddBill" ){
+            return <AddBill />
+        }
+        else if(location.pathname === "/receptionist/ManageBill" ){
+            return <ManageBill />
+        }
+        else if(location.pathname === "/receptionist/EditBill" ){
+            return <EditBill />
         }
         // else if(location.pathname === "/admin/ViewPrescription" ){
         //     return <pres />

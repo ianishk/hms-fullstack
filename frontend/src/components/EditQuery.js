@@ -25,14 +25,18 @@ const EditQuery = () => {
       const [formData,setFormData]=useState({
         patient:'',
         query:'',
-        status:'',
+        status:"true",
     });
     const [data,setData]=useState([]);
+    
     useEffect(()=>{
-        fetch(`http://localhost:5000/api/queries`,{headers:{'Content-Type':'application/json','x-auth-token':JSON.parse(localStorage.user).token}}).then((data) => data.json() ).then((val) => {
+        
+        fetch(`http://localhost:5000/api/queries/${id}`,{headers:{'Content-Type':'application/json','x-auth-token':JSON.parse(localStorage.user).token}}).then((data) => data.json() ).then((val) => {
           setData(val);
+
         })
     },[])
+    // formData.status = data.status;
     console.log(data);
     const onchange=(e)=>{
         setFormData({...formData,[e.target.name]:e.target.value});
@@ -42,7 +46,8 @@ const EditQuery = () => {
     const onsubmit=(e)=>{
         
         e.preventDefault();
-    fetch(`http://localhost:5000/api/queries/633d62c914c7fcbe3e2ad010`, {
+        console.log(formData);
+    fetch(`http://localhost:5000/api/queries/${id}`, {
             method: "POST",
             headers: {
                 // 'x-auth-token':JSON.parse(localStorage.user).token,
@@ -50,9 +55,10 @@ const EditQuery = () => {
             },
             body: JSON.stringify(formData)
         }).then((data) => data.json() ).then((val) => {
-            console.log(val);
+            console.log("hi1");
             
         })
+        console.log("hi2")
     }
 
   return (
@@ -60,7 +66,7 @@ const EditQuery = () => {
 
             <div className="w-full px-6 py-6 mx-auto">
 
-             {data.map((item, i) => (
+             
                 <form className="flex flex-col justify-center place-items-center" onSubmit={(e)=>onsubmit(e)}>
                     
                     <div className="flex flex-wrap -mx-3 mb-6">
@@ -77,7 +83,7 @@ const EditQuery = () => {
                             </label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
                             leading-tight focus:outline-none focus:bg-white focus:border-gray-400" id="grid-patient" type="text" 
-                            placeholder={item.patient} name="patient" onChange={e=>onchange(e)}/>
+                            placeholder={data.patient} name="patient" onChange={e=>{onchange(e)}} value={formData.patient} />
                         </div>
                     </div>
                     
@@ -87,7 +93,7 @@ const EditQuery = () => {
                         </label>
                         <textarea rows="4" className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
                         rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-query" type="text" 
-                        placeholder={item.query} name="query" onChange={e=>onchange(e)}/>
+                        placeholder={data.query} name="query" onChange={e=>{onchange(e)}} value={formData.query}/>
                     </div> <br/>
                     <div className="w-full md:w-[30rem] px-3 mb-6 md:mb-0">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-status">
@@ -95,9 +101,9 @@ const EditQuery = () => {
                             </label>
                             <select className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
                             leading-tight focus:outline-none focus:bg-white focus:border-gray-400" id="grid-status" type="text" 
-                            placeholder="False" name="status" onChange={e=>onchange(e)}>
-                                <option value="True">True</option>
-                                <option value="False">False</option>
+                            placeholder="select" name="status" onChange={e=>{onchange(e)}}>
+                                <option value="true">True</option>
+                                <option value="false">False</option>
                             </select>
                             
                         </div> 
@@ -115,7 +121,7 @@ const EditQuery = () => {
                 </ul>          
                 
                 </form>
-             ))}
+         
 
 
         </div>
