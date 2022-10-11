@@ -24,6 +24,7 @@ app.use('/api/doctor',require('./controllers/doctorControllers'));
 app.use('/api/pharmacist',require('./controllers/pharmacistControllers'))
 app.use('/api/inpatient',require('./controllers/inpatientController'));
 app.use('/api/appointment',require('./controllers/appointmentController'));
+app.use('/api/bill',require('./controllers/billController'));
 
 const port = process.env.PORT || 5000;
 
