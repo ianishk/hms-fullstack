@@ -7,10 +7,10 @@ const AppointmentSchema=mongoose.Schema({
         default: new Date()
     },
     from:{
-        type:Date
+        type:String
     },
     to:{
-        type:Date
+        type:String
     },
     symptoms:{
         type:String,

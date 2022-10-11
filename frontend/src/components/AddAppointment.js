@@ -6,13 +6,12 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 const AddAppointment = () => {
     const [formData,setFormData]=useState({
-        date:"",
+        date:new Date(),
         from:"",
         to:"",
         symptoms:"",
         patient:"",
-        doctor:"",
-        paid:""
+        doctor:""
     });
 
     const onchange=(e)=>{
@@ -22,10 +21,11 @@ const AddAppointment = () => {
 
     const onsubmit=(e)=>{
         e.preventDefault();
-        fetch(`http://localhost:5000/api/appointemnt/${formData.patient}/${formData.doctor}`, {
+        console.log(`http://localhost:5000/api/appointment/${formData.patient}/${formData.doctor}`)
+        fetch(`http://localhost:5000/api/appointment/${formData.patient}/${formData.doctor}`, {
             method: "POST",
             headers: {
-                'x-auth-token':JSON.parse(localStorage.user).token,
+                // 'x-auth-token':JSON.parse(localStorage.user).token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)
