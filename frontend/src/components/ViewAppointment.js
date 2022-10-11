@@ -38,7 +38,7 @@ const ViewAppointment = () => {
                     <div className="p-2 pb-0 mb-0 bg-white border-1 border-b-solid rounded border-black">
                         <h6 className="text-2xl uppercase">Appointments</h6>
                         <br/>
-                        <Link to={"/"+l+"/AddAppointmentPatient"} ><button className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">ADD</button></Link>
+                        {/* <Link to={"/"+l+"/AddAppointmentPatient"} ><button className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">ADD</button></Link> */}
                     </div>
                     <br/>
                     <div className="flex-auto px-0 pt-0 pb-2">
@@ -53,7 +53,7 @@ const ViewAppointment = () => {
                                 <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Symptoms</th>
                                 <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">PATIENT</th>
                                 <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">DOCTOR</th>
-                                <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Receptionist</th>
+                                {/* <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Receptionist</th> */}
                                 <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">PAID</th>
                                 <th className="px-2 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none text-m tracking-none whitespace-nowrap text-grey-400 opacity-70"></th>
                             </tr>
@@ -90,15 +90,15 @@ const ViewAppointment = () => {
                                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <h6 className="mb-0 leading-normal text-sm">{item.doctor}</h6>
                                     </td>
-                                    <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                    {/* <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <h6 className="mb-0 leading-normal text-sm">{item.receptionist}</h6>
-                                    </td>
+                                    </td> */}
                                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <h6 className="mb-0 leading-normal text-sm">{item.paid}</h6>
                                     </td>
-                                    <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                    {/* <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Delete </button>
-                                    </td>
+                                    </td> */}
                                 </tr>
                             
                           ))}
