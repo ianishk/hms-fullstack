@@ -2,18 +2,18 @@ const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
 
 const PrescriptionSchema=mongoose.Schema({
-    appointment:{
-        type:Schema.Types.ObjectId
+    doctor: {
+        type: Schema.Types.ObjectId,
     },
-    medicines:{
-        type:Schema.Types.ObjectId
+    patient: {
+        type: String,
     },
-    pharmacist:{
-        type:Schema.Types.ObjectId
+    medicine: {
+        type: String,
     },
-    paid:{
-        type:Boolean
-    }
+    instructions: {
+        type: String,
+    },
 })
 
 module.exports=Precription=mongoose.model('prescription',PrescriptionSchema);
