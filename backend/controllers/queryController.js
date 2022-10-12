@@ -7,7 +7,6 @@ const Query = require("../models/query");
 
 router.post(
   "/query",
-  auth,
   check("query", "query string should not be empty").notEmpty(),
   async (req, res) => {
     errors = validationResult(req);
@@ -38,7 +37,7 @@ router.post(
   }
 );
 
-router.get("/",auth,  async (req, res) => {
+router.get("/",  async (req, res) => {
   try {
     const queries = await Query.find();
     res.status(200).json(queries);
@@ -47,7 +46,7 @@ router.get("/",auth,  async (req, res) => {
   }
 });
 
-router.get("/:query_id", auth, async (req, res) => {
+router.get("/:query_id",  async (req, res) => {
   try {
     let query = await Query.findOne({ _id: req.params.query_id });
     res.status(200).json(query);
@@ -96,7 +95,7 @@ router.post(
   }
 );
 
-router.delete("/:query_id", auth, async (req, res) => {
+router.delete("/:query_id", async (req, res) => {
   try {
     await Query.findOneAndDelete({ _id: req.params.query_id });
     res.json({ msg: "Query deleted successfully." });

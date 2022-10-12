@@ -12,13 +12,14 @@ router.post('/:patient_id/:doctor_id',async(req,res)=>{
         let inpatient=await Inpatient.findById({_id: new ObjectID(req.params.patient_id)});
         // console.log(inpatient.name);
         let doctor=await Doctor.findById({_id: new ObjectID(req.params.doctor_id)});
-        const {from,to,symptoms}=req.body;
+        const {from,to,symptoms,paid}=req.body;
         let newAppointment=new Appointment({
             from:from,
             to:to,
             symptoms:symptoms,
             patient:inpatient._id,
-            doctor:doctor
+            doctor:doctor,
+            paid:paid
         });
         await newAppointment.save();
         res.json({msg:"Appointment made"});

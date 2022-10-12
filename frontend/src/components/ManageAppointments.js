@@ -142,7 +142,7 @@ const ManageAppointments = () => {
                                     <h6 className="mb-0 leading-normal text-sm">{item.receptionist}</h6>
                                     </td> */}
                                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                    <h6 className="mb-0 leading-normal text-sm">{item.paid}</h6>
+                                    <h6 className="mb-0 leading-normal text-sm">{item.paid.toString() }</h6>
                                     </td>
                                     <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <Link to={"/"+l+"/EditAppointment"} state={{ id:item._id}} className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>

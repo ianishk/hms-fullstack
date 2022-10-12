@@ -20,7 +20,7 @@ const EditAppointment = () => {
     const [data,setData]=useState([]);
     const onchange=(e)=>{
         setFormData({...formData,[e.target.name]:e.target.value});
-        console.log(formData);
+        
     }
     useEffect(()=>{
         fetch(`http://localhost:5000/api/appointment/app/${id}`,{headers:{'Content-Type':'application/json'}}).then((data) => data.json() ).then((val) => {
@@ -30,7 +30,6 @@ const EditAppointment = () => {
     },[])
     console.log(data);
     const onsubmit=(e)=>{
-        
         e.preventDefault();
         console.log(formData);
         fetch(`http://localhost:5000/api/appointment/${id}`, {

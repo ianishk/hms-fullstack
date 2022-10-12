@@ -11,7 +11,8 @@ const AddAppointment = () => {
         to:"",
         symptoms:"",
         patient:"",
-        doctor:""
+        doctor:"",
+        paid:"",
     });
 
     const onchange=(e)=>{
@@ -20,8 +21,9 @@ const AddAppointment = () => {
     }
 
     const onsubmit=(e)=>{
+        console.log(formData);
         e.preventDefault();
-        console.log(`http://localhost:5000/api/appointment/${formData.patient}/${formData.doctor}`)
+        // console.log(`http://localhost:5000/api/appointment/${formData.patient}/${formData.doctor}`)
         fetch(`http://localhost:5000/api/appointment/${formData.patient}/${formData.doctor}`, {
             method: "POST",
             headers: {
@@ -107,7 +109,7 @@ const AddAppointment = () => {
                             </label>
                             <select className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
                             leading-tight focus:outline-none focus:bg-white focus:border-gray-400" id="grid-paid" type="text" 
-                            placeholder="False" name="date" onChange={e=>onchange(e)}> 
+                            placeholder="False" name="paid" onChange={e=>onchange(e)}> 
                                 <option value="true">True</option>
                                 <option value="false">False</option>
                             </select>

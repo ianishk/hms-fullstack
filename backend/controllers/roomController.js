@@ -7,7 +7,7 @@ const Room = require("../models/room");
 
 router.post(
   "/room",
-  auth,
+  // auth,
   check("roomNo", "room num is required").isNumeric().notEmpty(),
   check("block", "block is required").notEmpty(),
   check("pricePerDay", "price per day is required").isNumeric().notEmpty(),
@@ -41,7 +41,7 @@ router.post(
   }
 );
 
-router.get("/", auth, async (req, res) => {
+router.get("/",  async (req, res) => {
   try {
     const rooms = await Room.find();
     res.status(200).json(rooms);
@@ -50,7 +50,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-router.get("/:room_no", auth, async (req, res) => {
+router.get("/:room_no",  async (req, res) => {
   try {
     let room = await Room.findOne({ roomNo: req.params.room_no });
     res.status(200).json(room);
@@ -67,7 +67,7 @@ router.get("/:room_no", auth, async (req, res) => {
 //   }
 // );
 
-router.delete("/:room_id", auth, async (req, res) => {
+router.delete("/:room_id",  async (req, res) => {
   try {
     await Room.findOneAndDelete({ _id: req.params.room_id });
     res.json({ msg: "Room deleted successfully." });
