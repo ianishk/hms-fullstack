@@ -24,58 +24,7 @@ const ManageReceptionist = () => {
       }).then((data) => data.json() ).then((val) => {
           console.log(val);
       })
-  }
-
-  // const data ={
-    
-  //       "Receptionist" :[
-  //         {
-  //           "id":"122",
-  //           "name":"John",
-  //           "last_name":"Doe",
-  //           "email":"j@gmail.com",
-  //           "age":"25",
-  //           "contact":"1234567890",
-  //           "address":"Xyz-street"
-  //         },
-  //         {
-  //           "id":"123",
-  //           "name":"Jack",
-  //           "last_name":"black",
-  //           "email":"jb@gmail.com",
-  //           "age":"27",
-  //           "contact":"1244567890",
-  //           "address":"Xyz-street"
-  //         },
-  //         {
-  //           "id":"124",
-  //           "name":"Jennny",
-  //           "last_name":"Day",
-  //           "email":"jd@gmail.com",
-  //           "age":"26",
-  //           "contact":"1234557890",
-  //           "address":"Xyz-street"
-  //         },
-  //         {
-  //           "id":"122",
-  //           "name":"John",
-  //           "last_name":"Doe",
-  //           "email":"j@gmail.com",
-  //           "age":"25",
-  //           "contact":"1234567890",
-  //           "address":"Xyz-street"
-  //         },
-  //         {
-  //           "id":"122",
-  //           "name":"John",
-  //           "last_name":"Doe",
-  //           "email":"j@gmail.com",
-  //           "age":"25",
-  //           "contact":"1234567890",
-  //           "address":"Xyz-street"
-  //         },
-  //       ]
-  //     }
+    }
   return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
 
@@ -137,7 +86,7 @@ const ManageReceptionist = () => {
                                     <h6 className="mb-0 leading-normal text-sm">{item.address}</h6>
                                     </td>
                                     <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                    <Link to={"/"+l+"/EditDoctor"}  className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>
+                                    <Link to={"/"+l+"/EditDoctor"} state={{ id:item._id}} className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>
                                     <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" onClick={()=>deleteReceptionist(item._id)}> Delete </button>
                                     </td>
                                 </tr>

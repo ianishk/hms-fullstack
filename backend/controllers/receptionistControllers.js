@@ -55,9 +55,9 @@ router.post(
     }
 );
 
-router.get('/receptionist_id',auth,async (req,res)=>{
+router.get('/:receptionist_id',auth,async (req,res)=>{
         try {
-            const receptionist=await Receptionist.findById(req.user.id).select('-password');
+            const receptionist=await Receptionist.findById(req.params.receptionist_id).select('-password');
             res.json(receptionist);
         } catch (err) {
             console.log(err.message);
@@ -106,24 +106,41 @@ router.delete('/:receptionist_id',async (req,res)=>{
     }
 });
 
-router.post('/update',
-    auth,
-    check('age','Age required').notEmpty(),
+router.post('/update/:receptionist_id',
+    // auth,
+    // check('age','Age required').notEmpty(),
     async (req,res)=>{
         const errors=validationResult(req);
         if(!errors.isEmpty())return res.status(400).json({errors:errors.array()});
-        const {name,age,phone,address}=req.body;
+        const {name,age,email,phone,address}=req.body;
         try {
             // const receptionist=Receptionist.findById({id:req.params.receptionist_id});
             // if(!receptionist)return res.status(400).res({msg:'No User found'});
 
             const fields={};
-            fields.name=name;
-            fields.age=age;
-            fields.phone=phone;
-            fields.address=address;
+            
+            if(name.length !=0)
+            {
+                fields.name=name;
+            }
+            if(age.length !=0)
+            {
+                fields.age=age;
+            }
+            if(email.length !=0)
+            {
+                fields.email=email;
+            }
+            if(phone.length !=0)
+            {
+                fields.phone=phone;
+            }
+            if(address.length !=0)
+            {
+                fields.address=address;
+            }
             let receptionist=await Receptionist.findOneAndUpdate(
-                {user:req.user.id},
+                {user:req.params.receptionist_id},
                 {$set:fields},
                 {new: true}
             )

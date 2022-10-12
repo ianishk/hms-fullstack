@@ -13,7 +13,7 @@ const ManagePharmacist = () => {
   const [pharmacist,setPharmacist]=useState([]);
   // console.log(JSON.parse(localStorage.user).token);
   useEffect(()=>{
-      fetch(`http://localhost:5000/api/pharmacist`,{headers:{'Content-Type':'application/json','x-auth-token':JSON.parse(localStorage.user).token}}).then((data) => data.json() ).then((val) => {
+      fetch(`http://localhost:5000/api/pharmacist`,{headers:{'Content-Type':'application/json'}}).then((data) => data.json() ).then((val) => {
         setPharmacist(val);
       })
   },[])
@@ -129,13 +129,13 @@ const ManagePharmacist = () => {
                                     <h6 className="mb-0 leading-normal text-sm">{item.age}</h6>
                                     </td>
                                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                    <h6 className="mb-0 leading-normal text-sm">{item.contact}</h6>
+                                    <h6 className="mb-0 leading-normal text-sm">{item.phone}</h6>
                                     </td>
                                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <h6 className="mb-0 leading-normal text-sm">{item.address}</h6>
                                     </td>
                                     <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                    <Link to={"/"+l+"/EditPharmacist"}  className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>
+                                    <Link to={"/"+l+"/EditPharmacist" } state={{ id:item._id}} className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>
                                     <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" onClick={()=>deletePharmacist(item._id)}> Delete </button>
                                     </td>
                                 </tr>

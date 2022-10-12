@@ -57,7 +57,14 @@ router.get('/',async (req,res)=>{
             console.log(error.message);
         }
     });
-
+router.get('/:pharmacist_id',async (req,res)=>{
+        try {
+            const pharmacist=await Pharmacist.findById({_id:req.params.pharmacist_id});
+            res.json(pharmacist);    
+        } catch (error) {
+            console.log(error.message);
+        }
+    });
 router.post('/login',
     check('email','email is required').isEmail(),
     check('password','password is required').notEmpty(),
@@ -94,15 +101,36 @@ router.post('/login',
 router.post('/update/:pharmacist_id',
     // auth,
     async (req,res)=>{
-        const {name,age,phone}=req.body;
+        const {name,email,password,age,phone,address}=req.body;
         try {
             let pharmacist=Pharmacist.findById({id:req.params.pharmacist_id});
             if(!pharmacist)return res.status(400).res({msg:'No User found'});
 
             const fields={};
-            fields.name=name;
-            fields.age=age;
-            fields.phone=phone;
+            if(name.length != 0 )
+            {
+                fields.name=name;
+            }
+            if(email.length != 0)
+            {
+                fields.email=email;
+            }
+            if(password.length != 0)
+            {
+                fields.password=password;
+            }
+            if(age.length != 0)
+            {
+                fields.age=age;
+            }
+            if(phone.length != 0)
+            {
+                fields.phone=phone;
+            }
+            if(address.length != 0)
+            {
+                fields.address=address;
+            }
             pharmacist=await Pharmacist.findOneAndUpdate(
                 {user:req.params.pharmacist_id},
                 {$set:fields},

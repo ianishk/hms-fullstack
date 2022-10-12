@@ -62,22 +62,31 @@ async(req,res)=>{
 })
 
 router.post('/:medicine_id',
-    auth,
-    check('name','name is required').notEmpty(),
-    check('description','description is required').notEmpty(),
-    check('count','count is required').notEmpty(),
+    // auth,
+    // check('name','name is required').notEmpty(),
+    // check('description','description is required').notEmpty(),
+    // check('count','count is required').notEmpty(),
     async(req,res)=>{
-        errors=validationResult(req);
-        if(!errors.isEmpty()){
-            return res.status(400).json({errors:errors.array()});
-        }
+        // errors=validationResult(req);
+        // if(!errors.isEmpty()){
+        //     return res.status(400).json({errors:errors.array()});
+        // }
 
         const {name,description,count}=req.body;
         try {
             const fields={};
-            fields.name=name;
-            fields.description=description;
-            fields.count=count;
+            if(name.length != 0 )
+            {
+                fields.name=name;
+            }
+            if(description.length != 0 )
+            {
+                fields.description=description;
+            }
+            if(count.length != 0 )
+            {
+                fields.count=count;
+            }
             let medicine=await Medicine.findById({_id:req.params.medicine_id});
             if(!medicine){
                 return res.status(400).json({error:[{msg:'Invalid ID'}]});

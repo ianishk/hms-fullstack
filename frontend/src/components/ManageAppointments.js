@@ -1,63 +1,78 @@
 
 import pict from "./logos/main_logo_v2.svg";
 import pictblack from "./logos/main_logo_black.svg";
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 const ManageAppointments = () => {
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
-  console.log(l);  
-  const data ={
+  // console.log(l);  
+  const [appointment,setAppointment]=useState([]);
+    useEffect(()=>{
+        fetch(`http://localhost:5000/api/appointment`,{headers:{'Content-Type':'application/json'}}).then((data) => data.json() ).then((val) => {
+          setAppointment(val);
+        })
+    },[]);
+    // console.log(appointment);
+    const deleteAppointment=(id)=>{
+      // console.log('qweqwe');
+      fetch(`http://localhost:5000/api/appointment/${id}`, {
+          method: "DELETE"
+      }).then((data) => data.json() ).then((val) => {
+          console.log(val);
+      })
+  }
+  // const data ={
     
-        "Appointments" :[
-          {
-            "id":"1",
-            "date":"24-09-2022",
-            "from":"9:15",
-            "to":"10:30",
-            "patient":"John",
-            "doctor":"James",
-            "symptoms":"fever,cold,cough",
-            "receptionist":"Jack",
-            "paid":"True"
-          },
-          {
-            "id":"2",
-            "date":"24-09-2022",
-            "from":"10:15",
-            "to":"11:30",
-            "patient":"Jamie",
-            "doctor":"James",
-            "symptoms":"headache,cough",
-            "receptionist":"Jack",
-            "paid":"True"
-          },
-          {
-            "id":"3",
-            "date":"25-09-2022",
-            "from":"9:15",
-            "to":"10:30",
-            "patient":"May",
-            "doctor":"James",
-            "symptoms":"fever",
-            "receptionist":"Jack",
-            "paid":"False"
-          },
-          {
-            "id":"4",
-            "date":"26-09-2022",
-            "from":"9:15",
-            "to":"10:30",
-            "patient":"Jane",
-            "doctor":"James",
-            "symptoms":"fever,cold,cough",
-            "receptionist":"Jack",
-            "paid":"False"
-          },
-        ]
-      }
+  //       "Appointments" :[
+  //         {
+  //           "id":"1",
+  //           "date":"24-09-2022",
+  //           "from":"9:15",
+  //           "to":"10:30",
+  //           "patient":"John",
+  //           "doctor":"James",
+  //           "symptoms":"fever,cold,cough",
+  //           "receptionist":"Jack",
+  //           "paid":"True"
+  //         },
+  //         {
+  //           "id":"2",
+  //           "date":"24-09-2022",
+  //           "from":"10:15",
+  //           "to":"11:30",
+  //           "patient":"Jamie",
+  //           "doctor":"James",
+  //           "symptoms":"headache,cough",
+  //           "receptionist":"Jack",
+  //           "paid":"True"
+  //         },
+  //         {
+  //           "id":"3",
+  //           "date":"25-09-2022",
+  //           "from":"9:15",
+  //           "to":"10:30",
+  //           "patient":"May",
+  //           "doctor":"James",
+  //           "symptoms":"fever",
+  //           "receptionist":"Jack",
+  //           "paid":"False"
+  //         },
+  //         {
+  //           "id":"4",
+  //           "date":"26-09-2022",
+  //           "from":"9:15",
+  //           "to":"10:30",
+  //           "patient":"Jane",
+  //           "doctor":"James",
+  //           "symptoms":"fever,cold,cough",
+  //           "receptionist":"Jack",
+  //           "paid":"False"
+  //         },
+  //       ]
+  //     }
   return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
 
@@ -92,7 +107,7 @@ const ManageAppointments = () => {
                             </tr>
                             </thead>
                             <tbody>
-                            {data.Appointments.map((item, i) => (
+                            {appointment.map((item, i) => (
                             
                                 //  <td>{item.name}</td> 
                                 
@@ -101,7 +116,7 @@ const ManageAppointments = () => {
                                     <td className="p-0 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <div className="flex px-2 py-1">
                                         <div className="flex flex-col justify-center">
-                                        <h6 className="mb-0 leading-normal text-sm">{item.id}</h6>
+                                        <h6 className="mb-0 leading-normal text-sm">{item._id}</h6>
                                         </div>
                                     </div>
                                     </td>
@@ -130,8 +145,8 @@ const ManageAppointments = () => {
                                     <h6 className="mb-0 leading-normal text-sm">{item.paid}</h6>
                                     </td>
                                     <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                    <Link to={"/"+l+"/EditAppointment"} className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>
-                                    <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Delete </button>
+                                    <Link to={"/"+l+"/EditAppointment"} state={{ id:item._id}} className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>
+                                    <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" onClick={()=>deleteAppointment(item._id)}> Delete </button>
                                     </td>
                                 </tr>
                             

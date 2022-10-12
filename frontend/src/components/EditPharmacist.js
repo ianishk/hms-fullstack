@@ -1,28 +1,69 @@
 
 import pict from "./logos/main_logo_v2.svg";
 import pictblack from "./logos/main_logo_black.svg";
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 const EditPharmacist = () => {
     const location = useLocation()
-    console.log(location.pathname)
-    const data ={
+
+    const { id } = location.state
+    console.log(id)
+    const [data,setData]=useState([]);
+    // const data ={
     
-        "Pharmacist" :[
-          {
-            "id":"122",
-            "name":"John",
-            "last_name":"Doe",
-            "email":"j@gmail.com",
-            "password":"********",
-            "age":"25",
-            "contact":"1234567890",
-            "address":"Xyz-street"
-          }
-        ]
-      }
+    //     "Pharmacist" :[
+    //       {
+    //         "id":"122",
+    //         "name":"John",
+    //         "last_name":"Doe",
+    //         "email":"j@gmail.com",
+    //         "password":"********",
+    //         "age":"25",
+    //         "contact":"1234567890",
+    //         "address":"Xyz-street"
+    //       }
+    //     ]
+    //   }
+    // console.log(`http://localhost:5000/api/pharmacist/${id}`)
+    useEffect(()=>{
+    fetch(`http://localhost:5000/api/pharmacist/${id}`,{headers:{'Content-Type':'application/json','x-auth-token':JSON.parse(localStorage.user).token}}).then((data) => data.json() ).then((val) => {
+      setData(val);
+      console.log(val)
+    })
+    },[])
+    console.log(data);
+    const [formData,setFormData]=useState({
+        name:'',
+        email:'',
+        password:'',
+        age:'',
+        phone:'',
+        address:''
+    });
+    const onchange=(e)=>{
+        setFormData({...formData,[e.target.name]:e.target.value});
+        console.log(formData);
+    }
+    const item=data;
+    const onsubmit=(e)=>{
+        
+        e.preventDefault();
+        console.log(formData);
+    fetch(`http://localhost:5000/api/pharmacist/update/${id}`, {
+            method: "POST",
+            headers: {
+                // 'x-auth-token':JSON.parse(localStorage.user).token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        }).then((data) => data.json() ).then((val) => {
+            console.log(val);
+            
+        })
+        // console.log("hi2")
+    }
   return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
 
@@ -30,8 +71,8 @@ const EditPharmacist = () => {
 
             <div className="w-full px-6 py-6 mx-auto bg-white">
 
-             {data.Pharmacist.map((item, i) => (
-                <form className="flex flex-col justify-center place-items-center">
+             
+                <form className="flex flex-col justify-center place-items-center" onSubmit={(e)=>onsubmit(e)}>
                     
                     <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -39,7 +80,7 @@ const EditPharmacist = () => {
                         ID
                         </label>
                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded 
-                        py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-id" type="text" value={item.id}/>
+                        py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-id" type="text" value={item._id}/>
                     </div>
                     <div className="w-full md:w-1/2 px-3">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-name">
@@ -47,7 +88,8 @@ const EditPharmacist = () => {
                         </label>
                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
                         leading-tight focus:outline-none focus:bg-white focus:border-gray-400" id="grid-name" type="text" 
-                        placeholder={item.name+' '+item.last_name}/>
+                        placeholder={item.name}
+                        name="name" onChange={(e)=>onchange(e)}/>
                     </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
@@ -56,7 +98,9 @@ const EditPharmacist = () => {
                             Email
                             </label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
-                            mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-email" type="text" placeholder={item.email}/>
+                            mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-email" type="text" placeholder={item.email}
+                            name="email" onChange={(e)=>onchange(e)}
+                            />
                         </div>
                         <div className="w-full md:w-1/2 px-3">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
@@ -64,7 +108,8 @@ const EditPharmacist = () => {
                             </label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
                             leading-tight focus:outline-none focus:bg-white focus:border-gray-400" id="grid-password" type="password" 
-                            placeholder={item.password}/>
+                            name="password" onChange={(e)=>onchange(e)}
+                            />
                         </div> 
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
@@ -74,14 +119,17 @@ const EditPharmacist = () => {
                             </label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
                             leading-tight focus:outline-none focus:bg-white focus:border-gray-400" id="grid-age" type="text" 
-                            placeholder={item.age}/>
+                            placeholder={item.age}
+                            name="age" onChange={(e)=>onchange(e)}/>
                         </div> 
                         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-contact">
                             Contact
                             </label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
-                            mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-contact" type="text" placeholder={item.contact}/>
+                            mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-contact" type="text" placeholder={item.phone}
+                            name="phone" onChange={(e)=>onchange(e)}
+                            />
                         </div>
                     </div>
                     <div className="w-full md:w-[30rem] px-3 mb-6 md:mb-0">
@@ -90,7 +138,9 @@ const EditPharmacist = () => {
                         </label>
                         <textarea rows="4" className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
                         rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-address" type="text" 
-                        placeholder={item.address}/>
+                        placeholder={item.address}
+                        name="address" onChange={(e)=>onchange(e)}
+                        />
                     </div> <br/>
                 <ul>
                     <li>
@@ -104,7 +154,7 @@ const EditPharmacist = () => {
                 </ul>          
                 
                 </form>
-             ))}
+             
 
             </div>
 

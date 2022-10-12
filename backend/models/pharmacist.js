@@ -16,6 +16,9 @@ const PharmacistSchema=mongoose.Schema({
     address:{
         type:String,
     },
+    phone:{
+        type:String,
+    },
     prescription:{
         type:Schema.Types.ObjectId
     }

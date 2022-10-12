@@ -13,6 +13,9 @@ const DoctorSchema=mongoose.Schema({
     age:{
         type:Number,
     },
+    phone:{
+        type:Number,
+    },
     address:{
         type:String,
     }

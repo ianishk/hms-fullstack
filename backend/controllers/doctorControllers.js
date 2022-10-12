@@ -59,6 +59,7 @@ router.get('/',async(req,res)=>{
     }
 })
 
+
 router.post('/login',
     check('email','email is required').isEmail(),
     check('password','password is required').notEmpty(),
@@ -92,7 +93,7 @@ router.post('/login',
         }
     });
 
-router.get('/:doctor_id',auth,async (req,res)=>{
+router.get('/:doctor_id',async (req,res)=>{
     try {
         const doctor=await Doctor.findById(req.params.doctor_id).select('-password');
         res.json(doctor);
@@ -110,23 +111,41 @@ router.delete('/:doctor_id',async (req,res)=>{
     }
 });
 
-router.post('/update',
-    auth,
-    check('age','Age required').notEmpty(),
+router.post('/update/:doctor_id',
+    // auth,
     async (req,res)=>{
-        const errors=validationResult(req);
-        if(!errors.isEmpty())return res.status(400).json({errors:errors.array()});
-        const {name,age,phone}=req.body;
+        const {name,email,password,age,phone,address}=req.body;
         try {
-            let doctor=Doctor.findById({id:req.params.receptionist_id});
+            let doctor=Doctor.findById({_id:req.params.doctor_id});
             if(!doctor)return res.status(400).res({msg:'No User found'});
 
             const fields={};
-            fields.name=name;
-            fields.age=age;
-            fields.phone=phone;
+            if(name.length != 0 )
+            {
+                fields.name=name;
+            }
+            if(email.length != 0 )
+            {
+                fields.email=email;
+            }
+            if(password.length != 0 )
+            {
+                fields.password=password;
+            }
+            if(phone.length != 0 )
+            {
+                fields.phone=phone;
+            }
+            if(age.length != 0 )
+            {
+                fields.age=age;
+            }
+            if(address.length != 0 )
+            {
+                fields.address=address;
+            }
             doctor=await Doctor.findOneAndUpdate(
-                {user:req.user.id},
+                {user:req.params.doctor_id},
                 {$set:fields},
                 {new: true}
             )

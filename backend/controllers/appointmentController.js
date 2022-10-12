@@ -35,12 +35,20 @@ router.get('/:patient_id',async(req,res)=>{
         console.log(error.message);
     }
 })
+router.get('/app/:app_id',async(req,res)=>{
+  try {
+      let appointment = await Appointment.find({ _id: req.params.app_id });
+      res.status(200).json(appointment);
+  } catch (error) {
+      console.log(error.message);
+  }
+})
 
 router.post(
     "/:appointment_id",
     // auth,
     async (req, res) => {
-      const {from,to,symptoms}=req.body;
+      const {from,to,symptoms,patient,doctor}=req.body;
       console.log(req.body)
       const fields={};
       if(from.length != 0 )
@@ -54,6 +62,14 @@ router.post(
       if(symptoms.length !=0)
       {
         fields.symptoms=symptoms;
+      }
+      if(patient.length !=0)
+      {
+        fields.patient=patient;
+      }
+      if(doctor.length !=0)
+      {
+        fields.doctor=doctor;
       }
     //   console.log(fields.query)
       try{
