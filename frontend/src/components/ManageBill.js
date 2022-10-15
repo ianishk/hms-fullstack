@@ -6,16 +6,23 @@ const ManageBill = () => {
   console.log(location);
   const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
   console.log(l);    
-  const data ={
-    
-    "Bill" :[
-      {
-        "name":"John",
-        "cost":"500",
-        "status":"False"
-      }
-    ]
-  }  
+  cconst [bill,setbill]=useState([]);
+  useEffect(()=>{
+      fetch(`http://localhost:5000/api/bill/`,{headers:{'Content-Type':'application/json'}}).then((data) => data.json() ).then((val) => {
+        setbill(val);
+      })
+  },[])
+  const deleteBill=(id)=>{
+      console.log('qweqwe');
+      fetch(`http://localhost:5000/api/bill/${id}`, {
+          method: "DELETE",
+          headers: {
+              'x-auth-token':JSON.parse(localStorage.user).token,
+          }
+      }).then((data) => data.json() ).then((val) => {
+          console.log(val);
+      })
+  }
 
     return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
@@ -47,7 +54,7 @@ const ManageBill = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        {data.Bill.map((item, i) => (
+                        {bill.map((item, i) => (
                         
                             //  <td>{item.name}</td> 
                             
@@ -71,7 +78,7 @@ const ManageBill = () => {
                                 </td>
                                 <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
                                 <Link to={"/"+l+"/EditBill"}  className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>
-                                <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Delete </button>
+                                <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" onClick={()=>deleteBill(item._id)}> Delete </button>
                                 </td>
                             </tr>
                         

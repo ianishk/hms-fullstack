@@ -18,7 +18,7 @@ const AddBill = () => {
 
     const onsubmit=(e)=>{
         e.preventDefault();
-        fetch(`http://localhost:5000/api/  fill route*`, {
+        fetch(`http://localhost:5000/api/bill`, {
             method: "POST",
             headers: {
                 'x-auth-token':JSON.parse(localStorage.user).token,
