@@ -33,8 +33,8 @@ const InpatientPage = () => {
         else if(location.pathname === "/inpatient/RoomDetail"){
           return <RoomDetail />
         }
-        else if(location.pathname === "/inpatient/AddQueryP" ){
-          return <AddQueryP />
+        else if(location.pathname === "/inpatient/AddQuery" ){
+          return <AddQuery />
         }
         else if(location.pathname === "/inpatient/ViewPrescription" ){
           return <ViewPrescription data={data}/>
