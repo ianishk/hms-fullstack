@@ -44,7 +44,7 @@ const RaiseQuery = () => {
                 <div className="p-2 pb-0 mb-0 bg-white border-1 border-b-solid rounded border-black">
                     <h6 className="text-2xl uppercase">Queries</h6>
                     <br/>
-                    <Link to={"/"+l+"/AddQueryP"}  className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">ADD</Link>
+                    <Link to={"/"+l+"/AddQuery"}  className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">ADD</Link>
                 </div>
                 <br/>
                 <div className="flex-auto px-0 pt-0 pb-2">
