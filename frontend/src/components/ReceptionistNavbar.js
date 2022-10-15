@@ -39,7 +39,7 @@ export default function ReceptionistNavbar() {
                             <Link to="/receptionist/EditReceptionist">Update Profile</Link>
                         </li> */}
                         <li>
-                        <button onClick={()=>onclick()} className="ml-[740px] bg-white rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">
+                        <button onClick={()=>onclick()} className="ml-[710px] bg-white rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">
                             <Link to="/login">LOGOUT</Link>
                         </button>
                         </li>

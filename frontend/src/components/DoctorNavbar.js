@@ -33,7 +33,7 @@ export default function DoctorNavbar() {
                             <Link to="/doctor/EditDoctor">Update Profile</Link>
                         </li> */}
                         <li>
-                        <button className="ml-[610px] bg-white rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">
+                        <button className="ml-[780px] bg-white rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">
                             <Link to="/login">LOGOUT</Link>
                         </button>
                         </li>

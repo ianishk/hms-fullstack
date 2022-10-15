@@ -38,7 +38,7 @@ const AdminNavabar = () => {
                             <Link to="/admin/ManagePharmacist">Pharmacist</Link>
                         </li>
                         <li>
-                            <button className="ml-[400px] rounded bg-white border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">LOGOUT</button>
+                            <button className="ml-[405px] rounded bg-white border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">LOGOUT</button>
                         </li>
                     </ul>
 
