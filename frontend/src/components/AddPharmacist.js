@@ -3,7 +3,7 @@ import pict from "./logos/main_logo_v2.svg";
 import pictblack from "./logos/main_logo_black.svg";
 import React,{useState} from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+
 
 const AddPharmacist = () => {
     const [formData,setFormData]=useState({

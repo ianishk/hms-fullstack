@@ -1,12 +1,14 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
 const ManageBill = () => {
   const location = useLocation();
   console.log(location);
   const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
   console.log(l);    
-  cconst [bill,setbill]=useState([]);
+  const [bill,setbill]=useState([]);
   useEffect(()=>{
       fetch(`http://localhost:5000/api/bill/`,{headers:{'Content-Type':'application/json'}}).then((data) => data.json() ).then((val) => {
         setbill(val);

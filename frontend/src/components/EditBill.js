@@ -5,6 +5,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 const EditBill = () => {
     const location = useLocation()
     const { id } = location.state;

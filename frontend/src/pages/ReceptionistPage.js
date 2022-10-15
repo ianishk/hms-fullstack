@@ -66,7 +66,7 @@ function ReceptionistPage() {
         else if(location.pathname === "/receptionist/AddBill" ){
             return <AddBill />
         }
-        else if(location.pathname === "/receptionist/ManageBill" ){
+        else if(location.pathname === "/receptionist/ManageBilling" ){
             return <ManageBill />
         }
         else if(location.pathname === "/receptionist/EditBill" ){
