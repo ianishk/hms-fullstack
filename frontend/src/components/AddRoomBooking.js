@@ -5,8 +5,32 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const AddRoom = () => {
-    const data ={
-        
+    const [formData,setFormData]=useState({
+        patient:"",
+        room:"",
+        from:"",
+        to:"",
+        price:"",
+        paid:"",
+    });
+
+    const onchange=(e)=>{
+        setFormData({...formData,[e.target.name]:e.target.value});
+        console.log(formData);
+    }
+
+    const onsubmit=(e)=>{
+        e.preventDefault();
+        fetch(`http://localhost:5000/api/  fill route*`, {
+            method: "POST",
+            headers: {
+                'x-auth-token':JSON.parse(localStorage.user).token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        }).then((data) => data.json() ).then((val) => {
+            console.log(val);
+        })
     }
   return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
@@ -14,7 +38,7 @@ const AddRoom = () => {
             <div className="w-full px-6 py-6 mx-auto">
 
             
-                <form className="flex flex-col justify-center place-items-center">
+                <form className="flex flex-col justify-center place-items-center" onSubmit={e=>onsubmit(e)}>
                     
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -22,7 +46,7 @@ const AddRoom = () => {
                             Patient
                             </label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
-                            mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-patient" type="text" placeholder="John"/>
+                            mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-patient" type="text" placeholder="John" name="patient" onChange={e=>onchange(e)}/>
                         </div>
                         <div className="w-full md:w-1/2 px-3">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-room">
@@ -30,7 +54,7 @@ const AddRoom = () => {
                             </label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
                             leading-tight focus:outline-none focus:bg-white focus:border-gray-400" id="grid-room" type="text" 
-                            placeholder="21"/>
+                            placeholder="21" name="room" onChange={e=>onchange(e)}/>
                         </div> 
                     </div>
 
@@ -40,7 +64,7 @@ const AddRoom = () => {
                         </label>
                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
                         rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-from-date" type="date" 
-                        placeholder="22-09-2022"/><br/>
+                        placeholder="22-09-2022" name="from" onChange={e=>onchange(e)}/><br/>
                     </div>
                     <div className="w-full md:w-[30rem] px-3 mb-6 md:mb-0">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-to-date">
@@ -48,7 +72,7 @@ const AddRoom = () => {
                         </label>
                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
                         rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-to-date" type="date" 
-                        placeholder="23-09-2022"/><br/>
+                        placeholder="23-09-2022" name="to" onChange={e=>onchange(e)}/><br/>
                     </div>
 
                     <div className="flex flex-wrap -mx-3 mb-6">
@@ -57,7 +81,7 @@ const AddRoom = () => {
                             Price
                             </label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
-                            mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-price" type="text" placeholder="450"/>
+                            mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-price" type="text" placeholder="450" name="price" onChange={e=>onchange(e)}/>
                         </div>
                         <div className="w-full md:w-1/2 px-3">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-paid">
@@ -65,7 +89,7 @@ const AddRoom = () => {
                             </label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
                             leading-tight focus:outline-none focus:bg-white focus:border-gray-400" id="grid-paid" type="text" 
-                            placeholder="True"/>
+                            placeholder="True" name="paid" onChange={e=>onchange(e)}/>
                         </div> 
                     </div>
                 
