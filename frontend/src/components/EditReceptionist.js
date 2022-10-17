@@ -4,6 +4,7 @@ import React,{useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 
 const EditReceptionist = () => {
+    console.log("hi rithvik")
     const [formData,setFormData]=useState({
         name:'',
         age:'',
@@ -11,6 +12,7 @@ const EditReceptionist = () => {
         phone:'',
         address:'',
     });
+    //Error is probably in line 18 receptionist_id no value given
     const [receptionist,setReceptionist]=useState([]);
     useEffect(()=>{
         fetch(`http://localhost:5000/api/receptionist/receptionist_id`,{headers:{'Content-Type':'application/json','x-auth-token':JSON.parse(localStorage.user).token}}).then((data) => data.json() ).then((val) => {
@@ -35,7 +37,7 @@ const EditReceptionist = () => {
             console.log(val);
         })
     }
-
+    console.log("hi rithvik again")
     // const data ={
     //     "Receptionist" :[
     //       {
@@ -55,29 +57,29 @@ const EditReceptionist = () => {
 
             <div className="w-full px-6 py-6 mx-auto">
 
-             {/* {data.Receptionist.map((item, i) => ( */}
+             
                 <form className="flex flex-col justify-center place-items-center" onSubmit={e=>onsubmit(e)}>
                     
                     <div className="flex flex-wrap -mx-3 mb-6">
-                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                        ID
-                        </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded 
-                        py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-first-name" type="text" value={receptionist._id}
-                        readonly
-                        />
-                    </div>
-                    <div className="w-full md:w-1/2 px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                        Name
-                        </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
-                        leading-tight focus:outline-none focus:bg-white focus:border-gray-400" id="grid-last-name" type="text" 
-                        placeholder={receptionist.name} name='name'
-                        onChange={e=>onchange(e)}
-                        />
-                    </div>
+                        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                            ID
+                            </label>
+                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded 
+                            py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-first-name" type="text" value={receptionist._id}
+                            readonly
+                            />
+                        </div>
+                        <div className="w-full md:w-1/2 px-3">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                            Name
+                            </label>
+                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
+                            leading-tight focus:outline-none focus:bg-white focus:border-gray-400" id="grid-last-name" type="text" 
+                            placeholder={receptionist.name} name='name'
+                            onChange={e=>onchange(e)}
+                            />
+                        </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -129,20 +131,20 @@ const EditReceptionist = () => {
                     </div>
 
                 
-                <br/>
-                <ul>
-                    <li>
-                        <Link to={-1} className="px-7 py-3 bg-white uppercase rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">
-                            back
-                        </Link>
-                        <button type = "submit" className="ml-3 px-7 py-3 bg-white uppercase rounded  border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">
-                            update
-                        </button>
-                    </li>
-                </ul>          
+                    <br/>
+                    <ul>
+                        <li>
+                            <Link to={-1} className="px-7 py-3 bg-white uppercase rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">
+                                back
+                            </Link>
+                            <button type = "submit" className="ml-3 px-7 py-3 bg-white uppercase rounded  border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">
+                                update
+                            </button>
+                        </li>
+                    </ul>          
                 
                 </form>
-             {/* ))} */}
+           
 
         </div>
 
