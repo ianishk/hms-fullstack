@@ -6,15 +6,17 @@ import { Link } from "react-router-dom";
 const AddPatient = () => {
   return (
     <div className="grid grid-cols-2 h-screen">
-     <div className="flex justify-center flex-col items-center bg-[#138CD6] flex"><br/><br/>
+     <div className="flex justify-center flex-col items-center bg-[#121212] flex"><br/><br/>
         <h1 className="text-5xl text-white font-semibold mb-6">Welcome to name!</h1><br/>
         <img className="object-cover w-60 h-60" src = {pict} alt = "project_logo"/>
         <br/>
-        <button className="inline-block px-7 py-3 bg-[#138CD6] border-white border-4 text-white font-medium rounded 
-        shadow-md hover:bg-white hover:text-[#138CD6] uppercase hover:shadow-lg focus:shadow-lg 
-        focus:outline-none focus:ring-0 active:bg-white active:shadow-lg transition duration-150 ease-in-out">
-          Log in
-        </button>
+        <Link to="/login">
+          <button className="inline-block px-7 py-3 bg-[#121212] border-white border-4 text-white font-medium rounded 
+          shadow-md hover:bg-white hover:text-[#121212] uppercase hover:shadow-lg focus:shadow-lg 
+          focus:outline-none focus:ring-0 active:bg-white active:shadow-lg transition duration-150 ease-in-out">
+            Log in
+          </button>
+        </Link>
 
     </div>
 
@@ -68,8 +70,8 @@ const AddPatient = () => {
 
         
         <br/><br/><br/>
-        <button type = "submit" className="inline-block px-7 py-3 bg-[#138CD6] uppercase text-white hover:border-[#1275B4] 
-        font-medium rounded shadow-md hover:bg-[#1275B4] border-[#138CD6] border-4 transition duration-150 ease-in-out">
+        <button type = "submit" className="inline-block px-7 py-3 bg-[#121212] uppercase text-white hover:border-[#1275B4] 
+        font-medium rounded shadow-md hover:bg-[#1275B4] border-[#121212] border-4 transition duration-150 ease-in-out">
           register
         </button>
         </form>
