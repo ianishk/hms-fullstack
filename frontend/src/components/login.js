@@ -9,10 +9,10 @@ import React from "react";
 // import { data } from "autoprefixer";
 
 const Login = () => {
-    const [loginInput, setLoginInput] = useState({email: "", password: "", userType: "user"})
+    const navigate = useNavigate();
+    const [loginInput, setLoginInput] = useState({email: "", password: "", userType: "inpatient"})
     const loginHandler = (e) => {
         e.preventDefault()
-        console.log(loginInput);
         fetch(`http://localhost:5000/api/${loginInput.userType}/login`, {
             method: "POST",
             headers: {
@@ -21,7 +21,25 @@ const Login = () => {
             body: JSON.stringify({email: loginInput.email, password: loginInput.password})
         }).then((data) => data.json() ).then((val) => {
             localStorage.setItem("user", JSON.stringify(val))
-            console.log(val)
+            console.log(val);
+            if(loginInput.userType==='receptionist'){
+                navigate('/receptionist/1');
+            }
+            if(loginInput.userType==='admin'){
+                navigate('/admin/1');
+            }
+            if(loginInput.userType==='doctor'){
+                navigate('/doctor/1');
+            }
+            if(loginInput.userType==='pharmacist'){
+                navigate('/pharmacist/1');
+            }
+            if(loginInput.userType==='inpatient'){
+                navigate('/inpatient/1');
+            }
+            if(loginInput.userType==='outpatient'){
+                navigate('/outpatient/1');
+            }
         })
     }
   return (
@@ -34,8 +52,9 @@ const Login = () => {
                 <h1 className="text-4xl font-semibold mb-6" style = {{color: "rgb(19, 140, 214)"}}>Log in as {' '}
                 <select  value={loginInput.userType} onChange={(e) => {setLoginInput({...loginInput, userType: e.target.value})}} className="text-4xl form-select inline-block px-3 py-1.5 text-base font-semibold bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-current focus:bg-white focus:outline-none active:text-grey-700">
 
-                    <option className="text-3xl">User</option>
-                        <option className="text-3xl" value="patient">Patient</option>
+                    {/* <option className="text-3xl">User</option> */}
+                        <option className="text-3xl" value="inpatient">In Patient</option>
+                        <option className="text-3xl" value="outpatient">Out Patient</option>
                         <option className="text-3xl" value="doctor">Doctor</option>
                         <option className="text-3xl" value="receptionist">Receptionist</option>
                         <option className="text-3xl" value="pharmacist">Pharmacist</option>

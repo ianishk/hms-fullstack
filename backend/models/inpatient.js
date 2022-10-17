@@ -2,39 +2,25 @@ const mongoose = require("mongoose");
 
 const inPatientSchema = mongoose.Schema({
   name: {
-    type: String,
-    required: true,
-    minLength: [2, "minimum length of the name is 2"],
-    maxLenght: [150, "maximum lenght of the name is 100"],
+    type: String
   },
   email: {
-    type: String,
-    required: true,
-    unique: true,
+    type: String
   },
   password: {
-    type: String,
-    required: true,
+    type: String
   },
   age: {
-    type: Number,
-    min: [0, "Age cannot be negative"],
-    required: true,
+    type: Number
   },
   gender: {
-    type: String,
-    enum: {
-      values: ["male", "female", "other"],
-      message: "{VALUE} is not a valid entry for Gender attribute",
-    },
+    type: String
   },
   phone: {
     type: String,
-    unique: true,
   },
   address: {
-    type: String,
-    required: true,
+    type: String
   },
   createdAt: {
     type: Date,

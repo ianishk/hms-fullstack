@@ -49,7 +49,7 @@ router.post(
     "/:appointment_id",
     // auth,
     async (req, res) => {
-      const {from,to,symptoms,patient,doctor}=req.body;
+      const {from,to,symptoms,patient,doctor,paid}=req.body;
       console.log(req.body)
       const fields={};
       if(from.length != 0 )
@@ -71,6 +71,13 @@ router.post(
       if(doctor.length !=0)
       {
         fields.doctor=doctor;
+      }
+      if(paid ==="false")
+      {
+        fields.paid=false
+      }
+      if(paid ==="true"){
+        fields.paid=true
       }
     //   console.log(fields.query)
       try{
