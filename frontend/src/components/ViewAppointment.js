@@ -31,6 +31,7 @@ const [appointment,setappointent]=useState([]);
           setappointent(val);
         })
     },[])
+    console.log(appointment);
   return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
 
@@ -74,7 +75,7 @@ const [appointment,setappointent]=useState([]);
                                     <td className="p-0 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <div className="flex px-2 py-1">
                                         <div className="flex flex-col justify-center">
-                                        <h6 className="mb-0 leading-normal text-sm">{item.id}</h6>
+                                        <h6 className="mb-0 leading-normal text-sm">{item._id}</h6>
                                         </div>
                                     </div>
                                     </td>
@@ -100,7 +101,7 @@ const [appointment,setappointent]=useState([]);
                                     <h6 className="mb-0 leading-normal text-sm">{item.receptionist}</h6>
                                     </td> */}
                                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                    <h6 className="mb-0 leading-normal text-sm">{item.paid}</h6>
+                                    <h6 className="mb-0 leading-normal text-sm">{item.paid.toString()}</h6>
                                     </td>
                                     {/* <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Delete </button>
