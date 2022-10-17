@@ -10,6 +10,7 @@ import AddQueryP from '../components/AddQueryP'
 import ViewPrescription from '../components/ViewPrescription'
 import ViewAppointment from '../components/ViewAppointment'
 import AddAppointmentPatient from '../components/AddAppointmentPatient'
+import AddInpatient from '../components/AddInpatient'
 
 const InpatientPage = () => {
     const location = useLocation()
@@ -30,7 +31,7 @@ const InpatientPage = () => {
         else if(location.pathname === "/inpatient/RaiseQuery"){
           return <RaiseQuery />
         }
-        else if(location.pathname === "/inpatient/RoomDetail"){
+                else if(location.pathname === "/inpatient/RoomDetail"){
           return <RoomDetail />
         }
         else if(location.pathname === "/inpatient/AddQuery" ){

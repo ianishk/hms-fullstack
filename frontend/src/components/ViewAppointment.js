@@ -9,22 +9,28 @@ const ViewAppointment = () => {
   console.log(location);
   const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
   console.log(l);  
-  const data ={
+//   const data ={
     
-        "Appointments" :[
-          {
-            "id":"1",
-            "date":"24-09-2022",
-            "from":"9:15",
-            "to":"10:30",
-            "patient":"John",
-            "doctor":"James",
-            "symptoms":"fever,cold,cough",
-            "receptionist":"Jack",
-            "paid":"True"
-          },
-        ]
-      }
+//         "Appointments" :[
+//           {
+//             "id":"1",
+//             "date":"24-09-2022",
+//             "from":"9:15",
+//             "to":"10:30",
+//             "patient":"John",
+//             "doctor":"James",
+//             "symptoms":"fever,cold,cough",
+//             "receptionist":"Jack",
+//             "paid":"True"
+//           },
+//         ]
+//       }
+const [appointment,setappointent]=useState([]);
+    useEffect(()=>{
+        fetch(`http://localhost:5000/api/appointment/`,{headers:{'Content-Type':'application/json'}}).then((data) => data.json() ).then((val) => {
+          setappointent(val);
+        })
+    },[])
   return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
 
@@ -49,7 +55,7 @@ const ViewAppointment = () => {
                                 <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">ID</th>
                                 <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Date</th>
                                 <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">FROM</th>
-                                <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">TO</th>
+                                {/* <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">TO</th> */}
                                 <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Symptoms</th>
                                 <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">PATIENT</th>
                                 <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">DOCTOR</th>
@@ -59,7 +65,7 @@ const ViewAppointment = () => {
                             </tr>
                             </thead>
                             <tbody>
-                            {data.Appointments.map((item, i) => (
+                            {appointment.map((item, i) => (
                             
                                 //  <td>{item.name}</td> 
                                 
@@ -78,9 +84,9 @@ const ViewAppointment = () => {
                                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <h6 className="mb-0 leading-normal text-sm">{item.from}</h6>
                                     </td>
-                                    <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                    {/* <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <h6 className="mb-0 leading-normal text-sm">{item.to}</h6>
-                                    </td>
+                                    </td> */}
                                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <h6 className="mb-0 leading-normal text-sm">{item.symptoms}</h6>
                                     </td>
