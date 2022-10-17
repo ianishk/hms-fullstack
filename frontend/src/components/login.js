@@ -49,7 +49,7 @@ const Login = () => {
                 <br/><br/>
                 <form className="flex flex-col justify-center place-items-center" onSubmit={loginHandler}>
                 
-                <h1 className="text-4xl font-semibold mb-6" style = {{color: "rgb(19, 140, 214)"}}>Log in as {' '}
+                <h1 className="text-4xl font-semibold mb-6" style = {{color: "black"}}>Log in as {' '}
                 <select  value={loginInput.userType} onChange={(e) => {setLoginInput({...loginInput, userType: e.target.value})}} className="text-4xl form-select inline-block px-3 py-1.5 text-base font-semibold bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-current focus:bg-white focus:outline-none active:text-grey-700">
 
                     {/* <option className="text-3xl">User</option> */}
@@ -67,7 +67,7 @@ const Login = () => {
                 rounded transition duration-300 ease-in-out m-0 focus:text-gray-700 focus:bg-[#dbf0fe] focus:border-[#dbf0fe] 
                 focus:outline-none" value={loginInput.email} onChange={(e) => {setLoginInput({...loginInput, email: e.target.value})}}/><br/>
                 
-                <input type = "text" id = "password" placeholder="Password" className ="block w-full px-4
+                <input type = "password" id = "password" placeholder="Password" className ="block w-full px-4
                 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 
                 rounded transition duration-300 ease-in-out m-0 focus:text-gray-700 focus:bg-[#dbf0fe] focus:border-[#dbf0fe] 
                 focus:outline-none" value={loginInput.password} onChange={(e) => {setLoginInput({...loginInput, password: e.target.value})}}/>
@@ -78,20 +78,20 @@ const Login = () => {
 
                
                 <br/><br/><br/><br/><br/>
-                <button type = "submit" className="inline-block px-7 py-3 bg-[#138CD6] text-white font-medium rounded shadow-md 
-                hover:bg-[#1275B4] hover:shadow-lg focus:bg-[#138CD6] focus:shadow-lg focus:outline-none focus:ring-0 
-                active:bg-[#12689E] active:shadow-lg transition duration-150 ease-in-out">
+                <button type = "submit" className="inline-block px-7 py-3 bg-white border-4 border-black text-black font-medium rounded shadow-md 
+                hover:bg-black hover:shadow-lg hover:text-white hover:border-black focus:shadow-lg focus:outline-none focus:ring-0 
+                active:bg-black active:shadow-lg transition duration-150 ease-in-out">
                     LOG IN
                 </button>
                 </form>
             </div>
             
-            <div className="flex justify-center flex-col items-center bg-[#138CD6] flex"><br/><br/>
+            <div className="flex justify-center flex-col items-center bg-[#121212] flex"><br/><br/>
                 <h1 className="text-5xl text-white font-semibold mb-6">Welcome to name!</h1><br/>
                 <img className="object-cover w-60 h-60" src = {pict} alt = "project_logo"/>
                 <br/>
-                <button className="inline-block px-7 py-3 bg-[#138CD6] border-white border-4 text-white font-medium rounded 
-                shadow-md hover:bg-white hover:text-[#138CD6] uppercase hover:shadow-lg focus:shadow-lg 
+                <button className="inline-block px-7 py-3 bg-[#121212] border-white border-4 text-white font-medium rounded 
+                shadow-md hover:bg-white hover:text-black uppercase hover:shadow-lg focus:shadow-lg 
                 focus:outline-none focus:ring-0 active:bg-white active:shadow-lg transition duration-150 ease-in-out">
                     Sign up as Patient
                 </button>
