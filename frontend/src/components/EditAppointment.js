@@ -14,7 +14,8 @@ const EditAppointment = () => {
         to:"",
         symptoms:"",
         patient:"",
-        doctor:""
+        doctor:"",
+        paid:"true"
     });
     // console.log(id)
     const [data,setData]=useState([]);
@@ -154,9 +155,12 @@ const EditAppointment = () => {
                             </label>
                             <select className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
                             leading-tight focus:outline-none focus:bg-white focus:border-gray-400" id="grid-paid" type="text" 
-                            placeholder="False">
-                                <option value="True">True</option>
-                                <option value="False">False</option>
+                            placeholder="False"
+                            name="paid"
+                            onChange={(e)=>onchange(e)}
+                            >
+                                <option value="true">True</option>
+                                <option value="false">False</option>
                             </select>
                             
                         </div> 
