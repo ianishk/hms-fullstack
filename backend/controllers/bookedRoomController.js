@@ -12,13 +12,13 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.post("/:patient_id/:room_id", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
       // add the doctor id from the req pro
-      const { from,price,paid } = req.body;
+      const { from,price,paid,patient,room } = req.body;
       const booking = new BookedRooms({
-        patient: req.params.patient_id,
-        room:req.params.room_id,
+        patient,
+        room,
         from,
         price,
         paid,
@@ -38,7 +38,7 @@ router.post("/:book_id", async (req, res) => {
       const fields={};
         if(from.length != 0 )
         {
-        fields.from=parseInt(from);
+        fields.from=from;
         }
         if(price.length != 0)
         {

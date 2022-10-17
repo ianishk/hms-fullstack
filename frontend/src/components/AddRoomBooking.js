@@ -10,7 +10,6 @@ const AddRoom = () => {
         patient:"",
         room:"",
         from:"",
-        to:"",
         price:"",
         paid:"",
     });
@@ -25,7 +24,7 @@ const AddRoom = () => {
         fetch(`http://localhost:5000/api/  fill route*`, {
             method: "POST",
             headers: {
-                'x-auth-token':JSON.parse(localStorage.user).token,
+                // 'x-auth-token':JSON.parse(localStorage.user).token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)
@@ -67,14 +66,14 @@ const AddRoom = () => {
                         rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-from-date" type="date" 
                         placeholder="22-09-2022" name="from" onChange={e=>onchange(e)}/><br/>
                     </div>
-                    <div className="w-full md:w-[30rem] px-3 mb-6 md:mb-0">
+                    {/* <div className="w-full md:w-[30rem] px-3 mb-6 md:mb-0">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-to-date">
                             To
                         </label>
                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
                         rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-to-date" type="date" 
                         placeholder="23-09-2022" name="to" onChange={e=>onchange(e)}/><br/>
-                    </div>
+                    </div> */}
 
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -93,7 +92,6 @@ const AddRoom = () => {
                             placeholder="True" name="paid" onChange={e=>onchange(e)}/>
                         </div> 
                     </div>
-                
                 <br/>
                 <ul>
                     <li>
