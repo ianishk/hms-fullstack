@@ -29,7 +29,9 @@ const OutpatientNavabar = () => {
                             <Link to="/outpatient/EditOutpatient">Update Profile</Link>
                         </li> */}
                         <li>
+                        <Link to="/login">
                             <button className="ml-[940px] rounded bg-white border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">LOGOUT</button>
+                        </Link>
                         </li>
                     </ul>
 

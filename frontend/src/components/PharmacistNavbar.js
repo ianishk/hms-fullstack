@@ -29,7 +29,9 @@ function PharmacistNavbar() {
         </li> */}
        
         <li>
+        <Link to="/login">
         <button className="ml-[1090px] bg-white rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">LOGOUT</button>
+        </Link>
         </li>
     </ul>
     
