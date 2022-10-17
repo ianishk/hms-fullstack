@@ -1,11 +1,13 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import AddAppointment from '../components/AddAppointment'
+import AddInpatient from '../components/AddInpatient'
 import AddPrescription from '../components/AddPrescription'
 // import AddAppointment from '../components/AddAppointment'
 import DoctorNavbar from '../components/DoctorNavbar'
 import EditAppointment from '../components/EditAppointment'
 import EditDoctor from '../components/EditDoctor'
+import EditInpatient from '../components/EditInpatient'
 import EditPrescription from '../components/EditPrescription'
 import Footer from '../components/Footer'
 import ManageAppointments from '../components/ManageAppointments'
@@ -22,6 +24,12 @@ function DoctorPage() {
         }
         else if(location.pathname === "/doctor/ManageInpatient" ){
             return <ManageInpatient />
+        }
+        else if(location.pathname === "/doctor/AddInpatient"){
+          return <AddInpatient />
+        }
+        else if(location.pathname === "/doctor/EditInpatient"){
+          return <EditInpatient />
         }
         else if(location.pathname === "/doctor/ManageOutpatient" ){
           return <ManageOutpatient />
