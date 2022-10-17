@@ -15,10 +15,10 @@ const bookedRooms = Schema({
     type: Date,
     required: true,
   },
-  to: {
-    type: Date,
-    required: true,
-  },
+  // to: {
+  //   type: Date,
+  //   required: true,
+  // },
   price: {
     type: Number,
     required: true,

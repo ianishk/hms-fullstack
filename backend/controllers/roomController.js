@@ -76,4 +76,37 @@ router.delete("/:room_id",  async (req, res) => {
   }
 });
 
+router.post("/:room_id",
+  async (req, res) => {
+    // let status = req.body.status;
+    const { roomNo, block, pricePerDay } = req.body;
+    // console.log(req.body)
+    const fields={};
+    if(roomNo.length != 0 )
+    {
+      fields.roomNo=parseInt(roomNo);
+    }
+    if(block.length != 0)
+    {
+      fields.block=block;
+    }
+    if(pricePerDay.length != 0)
+    {
+      fields.pricePerDay=pricePerDay;
+    }
+    console.log(fields.query)
+    try{
+        let r = await Room.findOneAndUpdate(
+          {_id: req.params.room_id},
+          {$set:fields},
+          {new: true}
+        );
+        res.status(200).json({msg:"Updated successfully"})
+    }
+    catch(err){
+        console.log(err);
+    }
+  }
+);
+
 module.exports = router;
