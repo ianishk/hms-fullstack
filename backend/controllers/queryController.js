@@ -13,20 +13,14 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    let { query } = req.body;
-    let patientId = req.user.id;
+    let { patient,query,status } = req.body;
+    // let patientId = req.user.id;
 
     try {
-      let room = await Query.findOne({ query });
-      if (room) {
-        return res
-          .status(400)
-          .json({ error: [{ msg: "Similar query is already there" }] });
-      }
-
       query = new Query({
-        patient: patientId,
+        patient,
         query,
+        status,
       });
       await query.save();
       res.status(201).json({ msg: "Query successfully reported" });

@@ -2,6 +2,7 @@ import pict from "./logos/main_logo_v2.svg";
 import pictblack from "./logos/main_logo_black.svg";
 import React,{useState,useEffect} from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const EditReceptionist = () => {
     const [formData,setFormData]=useState({
@@ -11,9 +12,12 @@ const EditReceptionist = () => {
         phone:'',
         address:'',
     });
+    const location = useLocation()
+    const { id } = location.state
+    console.log(id)
     const [receptionist,setReceptionist]=useState([]);
     useEffect(()=>{
-        fetch(`http://localhost:5000/api/receptionist/receptionist_id`,{headers:{'Content-Type':'application/json','x-auth-token':JSON.parse(localStorage.user).token}}).then((data) => data.json() ).then((val) => {
+        fetch(`http://localhost:5000/api/receptionist/${id}`,{headers:{'Content-Type':'application/json','x-auth-token':JSON.parse(localStorage.user).token}}).then((data) => data.json() ).then((val) => {
           setReceptionist(val);
         })
     },[])
@@ -24,7 +28,7 @@ const EditReceptionist = () => {
 
     const onsubmit=(e)=>{
         e.preventDefault();
-        fetch(`http://localhost:5000/api/receptionist/update`, {
+        fetch(`http://localhost:5000/api/receptionist/update/${id}`, {
             method: "POST",
             headers: {
                 'x-auth-token':JSON.parse(localStorage.user).token,

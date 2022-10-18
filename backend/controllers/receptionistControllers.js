@@ -55,7 +55,7 @@ router.post(
     }
 );
 
-router.get('/:receptionist_id',auth,async (req,res)=>{
+router.get('/:receptionist_id',async (req,res)=>{
         try {
             const receptionist=await Receptionist.findById(req.params.receptionist_id).select('-password');
             res.json(receptionist);

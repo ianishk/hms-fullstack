@@ -8,7 +8,7 @@ const AddQuery = () => {
     const [formData,setFormData]=useState({
         patient:"",
         query:"",
-        status:"",
+        status:"false",
     });
 
     const onchange=(e)=>{
@@ -18,10 +18,11 @@ const AddQuery = () => {
 
     const onsubmit=(e)=>{
         e.preventDefault();
+        console.log(formData);
         fetch(`http://localhost:5000/api/queries/query`, {
             method: "POST",
             headers: {
-                'x-auth-token':JSON.parse(localStorage.user).token,
+                // 'x-auth-token':JSON.parse(localStorage.user).token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)
@@ -43,6 +44,7 @@ const AddQuery = () => {
                         </label>
                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
                         rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-patient" type="text" 
+                        name='patient'
                         onChange={e=>onchange(e)}/><br/>
                     </div>
                     <div className="w-full md:w-[30rem] px-3 mb-6 md:mb-0">

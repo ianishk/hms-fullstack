@@ -1,35 +1,53 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 const RaiseQuery = () => {
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
-  console.log(l);  
-  const data ={
+  // console.log(l);  
+  const [query,setQuery]=useState([]);
+  // console.log(JSON.parse(localStorage.user).token);
+  useEffect(()=>{
+      fetch(`http://localhost:5000/api/queries`,{headers:{'Content-Type':'application/json'}}).then((data) => data.json() ).then((val) => {
+        setQuery(val);
+      })
+  },[]);
+  const deleteQuery=(id)=>{
+    fetch(`http://localhost:5000/api/queries/${id}`, {
+        method: "DELETE",
+        headers: {
+            // 'x-auth-token':JSON.parse(localStorage.user).token,
+        }
+    }).then((data) => data.json() ).then((val) => {
+        console.log(val);
+        console.log('qwe');
+    })
+}
+  // const data ={
     
-        "Queries" :[
-          {
-            "id":"1",
-            "patient":"John",
-            "query":"can i",
-            "status":"True",
-          },
-          {
-            "id":"2",
-            "patient":"John",
-            "query":"where to",
-            "status":"Flase",
-          },
-          {
-            "id":"3",
-            "patient":"John",
-            "query":"how to",
-            "status":"False",
-          },
+  //       "Queries" :[
+  //         {
+  //           "id":"1",
+  //           "patient":"John",
+  //           "query":"can i",
+  //           "status":"True",
+  //         },
+  //         {
+  //           "id":"2",
+  //           "patient":"John",
+  //           "query":"where to",
+  //           "status":"Flase",
+  //         },
+  //         {
+  //           "id":"3",
+  //           "patient":"John",
+  //           "query":"how to",
+  //           "status":"False",
+  //         },
          
-        ]
-      }
+  //       ]
+  //     }
     return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
 
@@ -60,7 +78,7 @@ const RaiseQuery = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        {data.Queries.map((item, i) => (
+                        {query.map((item, i) => (
                         
                             //  <td>{item.name}</td> 
                             
@@ -69,7 +87,7 @@ const RaiseQuery = () => {
                                 <td className="p-0 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                 <div className="flex px-2 py-1">
                                     <div className="flex flex-col justify-center">
-                                    <h6 className="mb-0 leading-normal text-sm">{item.id}</h6>
+                                    <h6 className="mb-0 leading-normal text-sm">{item._id}</h6>
                                     </div>
                                 </div>
                                 </td>
@@ -80,13 +98,12 @@ const RaiseQuery = () => {
                                 <h6 className="mb-0 leading-normal text-sm">{item.query}</h6>
                                 </td>
                                 <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <h6 className="mb-0 leading-normal text-sm">{item.status}</h6>
+                                <h6 className="mb-0 leading-normal text-sm">{item.status.toString()}</h6>
                                 </td>
                                 <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Delete </button>
+                                <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" onClick={()=>deleteQuery(item._id)}> Delete </button>
                                 </td>
                             </tr>
-                        
                       ))}
                         </tbody>
                     </table>

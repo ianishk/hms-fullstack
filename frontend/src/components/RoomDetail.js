@@ -1,21 +1,27 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 
-const RoomDetail = () => {
-    const data ={
+const RoomDetail = () => {  
+    const [booking,setbooking]=useState([]);
+    useEffect(()=>{
+      fetch(`http://localhost:5000/api/bookedRoom/`,{headers:{'Content-Type':'application/json'}}).then((data) => data.json() ).then((val) => {
+        setbooking(val);
+      })
+    },[])
+    // const data ={
     
-        "Room" :[
-          {
-            "id":"1",
-            "patient":"John",
-            "room":"21",
-            "from":"22-09-2022",
-            "to":"23-09-2022",
-            "price":"450",
-            "paid":"True"
-          }
+    //     "Room" :[
+    //       {
+    //         "id":"1",
+    //         "patient":"John",
+    //         "room":"21",
+    //         "from":"22-09-2022",
+    //         "to":"23-09-2022",
+    //         "price":"450",
+    //         "paid":"True"
+    //       }
          
-        ]
-      }
+    //     ]
+    //   }
     return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
 
@@ -40,14 +46,14 @@ const RoomDetail = () => {
                             <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Patient</th>
                             <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Room</th>
                             <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">From</th>
-                            <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">To</th>
+                            {/* <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">To</th> */}
                             <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Price</th>
                             <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Paid</th>
                             <th className="px-2 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none text-m tracking-none whitespace-nowrap text-grey-400 opacity-70"></th>
                         </tr>
                         </thead>
                         <tbody>
-                        {data.Room.map((item, i) => (
+                        {booking.map((item, i) => (
                         
                             //  <td>{item.name}</td> 
                             
@@ -56,7 +62,7 @@ const RoomDetail = () => {
                                 <td className="p-0 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                 <div className="flex px-2 py-1">
                                     <div className="flex flex-col justify-center">
-                                    <h6 className="mb-0 leading-normal text-sm">{item.id}</h6>
+                                    <h6 className="mb-0 leading-normal text-sm">{item._id}</h6>
                                     </div>
                                 </div>
                                 </td>
@@ -69,14 +75,14 @@ const RoomDetail = () => {
                                 <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                 <h6 className="mb-0 leading-normal text-sm">{item.from}</h6>
                                 </td>
-                                <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                {/* <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                 <h6 className="mb-0 leading-normal text-sm">{item.to}</h6>
-                                </td>
+                                </td> */}
                                 <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                 <h6 className="mb-0 leading-normal text-sm">{item.price}</h6>
                                 </td>
                                 <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <h6 className="mb-0 leading-normal text-sm">{item.paid}</h6>
+                                <h6 className="mb-0 leading-normal text-sm">{item.paid.toString()}</h6>
                                 </td>
                                 <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
                                 </td>
