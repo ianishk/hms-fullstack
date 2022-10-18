@@ -15,7 +15,8 @@ router.post(
     check('age','age is required').notEmpty(),
     check('phone','phone is required').notEmpty(),
     check('bookedRooms','room is required').notEmpty(),
-    check('address','address is required').notEmpty()
+    check('address','address is required').notEmpty(),
+    check('gender','gender is required').notEmpty()
     ,
     async (req,res)=>{
         console.log(req.body);
@@ -23,7 +24,7 @@ router.post(
         if(!errors.isEmpty()){
             return res.status(400).json({errors:errors.array()});
         }
-        const {name,email,password,age,phone,address,bookedRooms}=req.body;
+        const {name,email,password,age,phone,address,gender}=req.body;
 
         try{
             let outPatient=await OutPatient.findOne({email});
@@ -31,7 +32,7 @@ router.post(
                 return res.status(400).json({error:[{msg:'User is already taken'}]});
             }
 
-            outPatient=new OutPatient({name,email,password,age,phone,address,bookedRooms});
+            outPatient=new OutPatient({name,email,password,age,phoneNo:phone,address,gender});
 
             //encrypting password
             const salt=await bcrypt.genSalt(10);
@@ -140,4 +141,13 @@ router.post('/login',
         }
         
     })
-    module.exports=router;
+
+router.get('/',async(req,res)=>{
+        try {
+            const outpatient=await OutPatient.find();
+            res.json(outpatient);
+        } catch (err) {
+            console.log(err.message);
+        }
+})
+module.exports=router;

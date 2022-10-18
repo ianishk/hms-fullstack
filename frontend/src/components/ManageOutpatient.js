@@ -1,7 +1,6 @@
-
 import pict from "./logos/main_logo_v2.svg";
 import pictblack from "./logos/main_logo_black.svg";
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 const ManageOutpatient = () => {
@@ -69,6 +68,7 @@ const ManageOutpatient = () => {
       setOutpatient(val);
     })
   },[])
+  console.log(outpatient)
   const deleteOutpatient=(id)=>{
     console.log(`http://localhost:5000/api/outpatient/${id}`);
     fetch(`http://localhost:5000/api/outpatient/${id}`, {
@@ -122,7 +122,7 @@ const ManageOutpatient = () => {
                                     <td className="p-0 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <div className="flex px-2 py-1">
                                         <div className="flex flex-col justify-center">
-                                        <h6 className="mb-0 leading-normal text-sm">{item.id}</h6>
+                                        <h6 className="mb-0 leading-normal text-sm">{item._id}</h6>
                                         </div>
                                     </div>
                                     </td>
@@ -139,7 +139,7 @@ const ManageOutpatient = () => {
                                     <h6 className="mb-0 leading-normal text-sm">{item.gender}</h6>
                                     </td>
                                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                    <h6 className="mb-0 leading-normal text-sm">{item.contact}</h6>
+                                    <h6 className="mb-0 leading-normal text-sm">{item.phoneNo}</h6>
                                     </td>
                                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <h6 className="mb-0 leading-normal text-sm">{item.address}</h6>
