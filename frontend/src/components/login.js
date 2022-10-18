@@ -2,7 +2,7 @@
 import pict from "./logos/main_logo_v2.svg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 import React from "react";
 // import { Link } from "react-router-dom";
@@ -78,7 +78,7 @@ const Login = () => {
 
                
                 <br/><br/><br/><br/><br/>
-                <button type = "submit" className="inline-block px-7 py-3 bg-white border-4 border-black text-black font-medium rounded shadow-md 
+                <button type = "submit" className="inline-block px-7 py-3 bg-white border-2 border-black text-black font-medium rounded shadow-md 
                 hover:bg-black hover:shadow-lg hover:text-white hover:border-black focus:shadow-lg focus:outline-none focus:ring-0 
                 active:bg-black active:shadow-lg transition duration-150 ease-in-out">
                     LOG IN
@@ -90,11 +90,12 @@ const Login = () => {
                 <h1 className="text-5xl text-white font-semibold mb-6">Welcome to name!</h1><br/>
                 <img className="object-cover w-60 h-60" src = {pict} alt = "project_logo"/>
                 <br/>
-                <button className="inline-block px-7 py-3 bg-[#121212] border-white border-4 text-white font-medium rounded 
-                shadow-md hover:bg-white hover:text-black uppercase hover:shadow-lg focus:shadow-lg 
-                focus:outline-none focus:ring-0 active:bg-white active:shadow-lg transition duration-150 ease-in-out">
+                <Link to="/AddPatient">    <button className="inline-block px-7 py-3 bg-[#121212] border-white border-2 text-white font-medium rounded 
+                    shadow-md hover:bg-white hover:text-black uppercase hover:shadow-lg focus:shadow-lg 
+                    focus:outline-none focus:ring-0 active:bg-white active:shadow-lg transition duration-150 ease-in-out">
                     Sign up as Patient
-                </button>
+                    </button>
+                </Link>
             </div>
     </div>
            

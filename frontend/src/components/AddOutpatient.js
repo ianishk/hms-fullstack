@@ -90,14 +90,14 @@ const AddOutpatient = () => {
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-gender">
                             Gender
                             </label>
-                            <select className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 
+                            <select className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3
                             leading-tight focus:outline-none focus:bg-white focus:border-gray-400" id="grid-gender" type="text" 
                             onChange={e=>onchange(e)} name='gender'>
                                 <option value="female">Female</option>
                                 <option value="male">Male</option>
                                 <option value="other">Other</option>
                             </select>                           
-                    </div> 
+                    </div> <br/>
 
                     <div className="w-full md:w-[30rem] px-3 mb-6 md:mb-0">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-address">

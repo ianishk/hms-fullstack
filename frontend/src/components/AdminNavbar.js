@@ -37,8 +37,13 @@ const AdminNavabar = () => {
                         <li className="mt-0.5 w-full rounded border-black border-2 bg-white text-black py-3 mr-2 text-xl flex justify-center place-items-center whitespace-nowrap px-4 transition duration-300 hover:bg-black hover:text-white">
                             <Link to="/admin/ManagePharmacist">Pharmacist</Link>
                         </li>
+                        <li className="ml-[405px]">
+            
+                        </li>
                         <li>
-                            <button className="ml-[405px] rounded bg-white border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">LOGOUT</button>
+                        <Link to="/login">
+                            <button className="rounded bg-white border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">LOGOUT</button>
+                        </Link>
                         </li>
                     </ul>
 

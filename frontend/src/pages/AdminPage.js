@@ -1,5 +1,5 @@
 import React from 'react'
-import AdminNavabar from '../components/AdminNavabar'
+import AdminNavbar from '../components/AdminNavbar'
 import Footer from '../components/Footer'
 import ManageDoctor from '../components/ManageDoctor'
 import EditPharmacist from '../components/EditPharmacist'
@@ -98,7 +98,7 @@ const AdminPage = () => {
     }
   return (
     <>
-    <AdminNavabar />
+    <AdminNavbar />
     {findComponent()}
     <Footer />
     </>

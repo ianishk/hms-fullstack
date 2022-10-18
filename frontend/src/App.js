@@ -8,6 +8,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import AddPatient from "./components/AddPatient";
 import Login from "./components/login";
 
 // import login from "./components/login";
@@ -47,6 +48,7 @@ function App() {
         <Route path="/inpatient/:id" element={<InpatientPage />} />
         <Route path="/outpatient/:id" element={<OutpatientPage />}/>
         <Route path="/login" element={<Login />}/>
+        <Route path="/AddPatient" element={<AddPatient />}/>
       </Routes>
     </BrowserRouter>
   </>

@@ -102,7 +102,7 @@ const AddAppointment = () => {
                         mb-3 leading-tight focus:outline-none focus:border-gray-400 focus:bg-white" id="grid-receptionist" type="text" placeholder="Jack" name="" onChange={e=>onchange(e)}/>
                     </div> */}
                        
-                    <br/>
+                    
                     <div className="w-full md:w-[30rem] px-3 mb-6 md:mb-0">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-paid">
                             Paid

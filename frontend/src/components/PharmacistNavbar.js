@@ -27,9 +27,13 @@ function PharmacistNavbar() {
         {/* <li className="mt-0.5 w-full rounded border-black border-2 bg-white text-black py-3 mr-2 text-xl flex justify-center place-items-center whitespace-nowrap px-4 transition duration-300 hover:bg-black hover:text-white" href="">
             <Link to="/pharmacist/EditPharmacist">Update Profile</Link>
         </li> */}
-       
+        <li className="ml-[1090px]">
+            
+        </li>
         <li>
-        <button className="ml-[1090px] bg-white rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">LOGOUT</button>
+        <Link to="/login">
+        <button className="bg-white rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">LOGOUT</button>
+        </Link>
         </li>
     </ul>
     
