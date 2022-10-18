@@ -5,60 +5,81 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 const ManageOutpatient = () => {
-  const location = useLocation();
-  console.log(location);
-  const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
-  console.log(l);
-  const data ={
+  // const location = useLocation();
+  // console.log(location);
+  // const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
+  // console.log(l);
+  // const data ={
     
-        "Outpatient" :[
-          {
-            "id":"122",
-            "name":"John",
-            "last_name":"Doe",
-            "email":"j@gmail.com",
-            "age":"25",
-            "contact":"1234567890",
-            "address":"Xyz-street"
-          },
-          {
-            "id":"123",
-            "name":"Jack",
-            "last_name":"black",
-            "email":"jb@gmail.com",
-            "age":"27",
-            "contact":"1244567890",
-            "address":"Xyz-street"
-          },
-          {
-            "id":"124",
-            "name":"Jennny",
-            "last_name":"Day",
-            "email":"jd@gmail.com",
-            "age":"26",
-            "contact":"1234557890",
-            "address":"Xyz-street"
-          },
-          {
-            "id":"122",
-            "name":"John",
-            "last_name":"Doe",
-            "email":"j@gmail.com",
-            "age":"25",
-            "contact":"1234567890",
-            "address":"Xyz-street"
-          },
-          {
-            "id":"122",
-            "name":"John",
-            "last_name":"Doe",
-            "email":"j@gmail.com",
-            "age":"25",
-            "contact":"1234567890",
-            "address":"Xyz-street"
-          },
-        ]
-      }
+  //       "Outpatient" :[
+  //         {
+  //           "id":"122",
+  //           "name":"John",
+  //           "last_name":"Doe",
+  //           "email":"j@gmail.com",
+  //           "age":"25",
+  //           "contact":"1234567890",
+  //           "address":"Xyz-street"
+  //         },
+  //         {
+  //           "id":"123",
+  //           "name":"Jack",
+  //           "last_name":"black",
+  //           "email":"jb@gmail.com",
+  //           "age":"27",
+  //           "contact":"1244567890",
+  //           "address":"Xyz-street"
+  //         },
+  //         {
+  //           "id":"124",
+  //           "name":"Jennny",
+  //           "last_name":"Day",
+  //           "email":"jd@gmail.com",
+  //           "age":"26",
+  //           "contact":"1234557890",
+  //           "address":"Xyz-street"
+  //         },
+  //         {
+  //           "id":"122",
+  //           "name":"John",
+  //           "last_name":"Doe",
+  //           "email":"j@gmail.com",
+  //           "age":"25",
+  //           "contact":"1234567890",
+  //           "address":"Xyz-street"
+  //         },
+  //         {
+  //           "id":"122",
+  //           "name":"John",
+  //           "last_name":"Doe",
+  //           "email":"j@gmail.com",
+  //           "age":"25",
+  //           "contact":"1234567890",
+  //           "address":"Xyz-street"
+  //         },
+  //       ]
+  //     }
+  const location = useLocation();
+  // console.log(location);
+  const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
+  // console.log(l);  
+  const [outpatient,setOutpatient]=useState([]);
+  useEffect(()=>{
+    fetch(`http://localhost:5000/api/outpatient/`,{headers:{'Content-Type':'application/json'}}).then((data) => data.json() ).then((val) => {
+      setOutpatient(val);
+    })
+  },[])
+  const deleteOutpatient=(id)=>{
+    console.log(`http://localhost:5000/api/outpatient/${id}`);
+    fetch(`http://localhost:5000/api/outpatient/${id}`, {
+        method: "DELETE",
+        headers: {
+            // 'x-auth-token':JSON.parse(localStorage.user).token,
+        }
+    }).then((data) => data.json() ).then((val) => {
+        console.log(val);
+    })
+}
   return (
         <div className="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-100 text-grey-700">
 
@@ -85,13 +106,14 @@ const ManageOutpatient = () => {
                                 <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Name</th>
                                 <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Email</th>
                                 <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Age</th>
+                                <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Gender</th>
                                 <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Phone Number</th>
                                 <th className="px-2 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-m border-b-solid tracking-none whitespace-nowrap text-grey-400 opacity-70">Address</th>
                                 <th className="px-2 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none text-m tracking-none whitespace-nowrap text-grey-400 opacity-70"></th>
                             </tr>
                             </thead>
                             <tbody>
-                            {data.Outpatient.map((item, i) => (
+                            {outpatient.map((item, i) => (
                             
                                 //  <td>{item.name}</td> 
                                 
@@ -114,14 +136,17 @@ const ManageOutpatient = () => {
                                     <h6 className="mb-0 leading-normal text-sm">{item.age}</h6>
                                     </td>
                                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                    <h6 className="mb-0 leading-normal text-sm">{item.gender}</h6>
+                                    </td>
+                                    <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <h6 className="mb-0 leading-normal text-sm">{item.contact}</h6>
                                     </td>
                                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <h6 className="mb-0 leading-normal text-sm">{item.address}</h6>
                                     </td>
                                     <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                    <Link to={"/"+l+"/EditOutpatient"} className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>
-                                    <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Delete </button>
+                                    <Link to={"/"+l+"/EditOutpatient"} state={{ id:item._id} } className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>
+                                    <button href="" className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" onClick={()=>deleteOutpatient(item._id)}> Delete </button>
                                     </td>
                                 </tr>
                             

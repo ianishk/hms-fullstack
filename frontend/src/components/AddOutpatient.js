@@ -23,10 +23,10 @@ const AddOutpatient = () => {
 
     const onsubmit=(e)=>{
         e.preventDefault();
-        fetch(`http://localhost:5000/api/  fill route*`, {
+        fetch(`http://localhost:5000/api/outpatient/signup`, {
             method: "POST",
             headers: {
-                'x-auth-token':JSON.parse(localStorage.user).token,
+                // 'x-auth-token':JSON.parse(localStorage.user).token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)

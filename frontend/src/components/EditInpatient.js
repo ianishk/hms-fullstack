@@ -19,7 +19,7 @@ const EditInpatient = () => {
     });
     const onsubmit=(e)=>{
         e.preventDefault();
-        console.log(`http://localhost:5000/api/doctor/update/${id}`)
+        // console.log(`http://localhost:5000/api/doctor/update/${id}`)
         fetch(`http://localhost:5000/api/inpatient/update/${id}`, {
             method: "POST",
             headers: {
