@@ -95,5 +95,49 @@ router.post('/login',
             console.log(err.message);
         }
     })
+    router.post('/update/:outpatient_id',
+    // auth,
+    // check('age','Age required').notEmpty(),
+    async (req,res)=>{
+        const errors=validationResult(req);
+        if(!errors.isEmpty())return res.status(400).json({errors:errors.array()});
+        const {name,email,age,phone,address}=req.body;
+        try {
+            // const receptionist=Receptionist.findById({id:req.params.receptionist_id});
+            // if(!receptionist)return res.status(400).res({msg:'No User found'});
 
+            const fields={};
+            
+            if(name.length !=0)
+            {
+                fields.name=name;
+            }
+            if(age.length !=0)
+            {
+                fields.age=age;
+            }
+            if(email.length !=0)
+            {
+                fields.email=email;
+            }
+            if(phone.length !=0)
+            {
+                fields.phone=phone;
+            }
+            if(address.length !=0)
+            {
+                fields.address=address;
+            }
+            let receptionist=await OutPatient.findOneAndUpdate(
+                {user:req.params.outpatient_id},
+                {$set:fields},
+                {new: true}
+            )
+
+            return res.json({msg:'Update Complete'});
+        } catch (error) {
+            console.log(error.message);
+        }
+        
+    })
     module.exports=router;
