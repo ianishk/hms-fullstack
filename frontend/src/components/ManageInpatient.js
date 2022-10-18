@@ -16,11 +16,11 @@ const ManageInpatient = () => {
     })
   },[])
   const deleteInpatient=(id)=>{
-    console.log('qweqwe');
+    console.log(`http://localhost:5000/api/inpatient/${id}`);
     fetch(`http://localhost:5000/api/inpatient/${id}`, {
         method: "DELETE",
         headers: {
-            'x-auth-token':JSON.parse(localStorage.user).token,
+            // 'x-auth-token':JSON.parse(localStorage.user).token,
         }
     }).then((data) => data.json() ).then((val) => {
         console.log(val);
@@ -146,7 +146,7 @@ const ManageInpatient = () => {
                                     <h6 className="mb-0 leading-normal text-sm">{item.address}</h6>
                                     </td>
                                     <td className="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                    <Link to={"/"+l+"/EditInpatient"} className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>
+                                    <Link to={"/"+l+"/EditInpatient"} state={{ id:item._id} }className="mr-2 font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white"> Edit </Link>
                                     <button className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white" onClick={()=>deleteInpatient(item._id)}> Delete </button>
                                     </td>
                                 </tr>
