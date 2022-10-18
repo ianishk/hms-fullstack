@@ -28,7 +28,7 @@ const EditPharmacist = () => {
     //   }
     // console.log(`http://localhost:5000/api/pharmacist/${id}`)
     useEffect(()=>{
-    fetch(`http://localhost:5000/api/pharmacist/${id}`,{headers:{'Content-Type':'application/json','x-auth-token':JSON.parse(localStorage.user).token}}).then((data) => data.json() ).then((val) => {
+    fetch(`http://localhost:5000/api/pharmacist/${id}`,{headers:{'Content-Type':'application/json'}}).then((data) => data.json() ).then((val) => {
       setData(val);
       console.log(val)
     })
@@ -54,7 +54,6 @@ const EditPharmacist = () => {
     fetch(`http://localhost:5000/api/pharmacist/update/${id}`, {
             method: "POST",
             headers: {
-                // 'x-auth-token':JSON.parse(localStorage.user).token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)

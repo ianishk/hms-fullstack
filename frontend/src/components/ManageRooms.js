@@ -8,7 +8,7 @@ const ManageRooms = () => {
   console.log(l); 
   const [rooms,setRooms]=useState([]);
   useEffect(()=>{
-    fetch(`http://localhost:5000/api/rooms`,{headers:{'Content-Type':'application/json','x-auth-token':JSON.parse(localStorage.user).token}}).then((data) => data.json() ).then((val) => {
+    fetch(`http://localhost:5000/api/rooms`,{headers:{'Content-Type':'application/json'}}).then((data) => data.json() ).then((val) => {
       setRooms(val);
     })
   },[])
