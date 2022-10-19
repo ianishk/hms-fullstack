@@ -11,7 +11,7 @@ const AddPatient = () => {
         <img className="object-cover w-60 h-60" src = {pict} alt = "project_logo"/>
         <br/>
         <Link to="/login">
-          <button className="inline-block px-7 py-3 bg-[#121212] border-white border-4 text-white font-medium rounded 
+          <button className="inline-block px-7 py-3 bg-[#121212] border-white border-2 text-white font-medium rounded 
           shadow-md hover:bg-white hover:text-[#121212] uppercase hover:shadow-lg focus:shadow-lg 
           focus:outline-none focus:ring-0 active:bg-white active:shadow-lg transition duration-150 ease-in-out">
             Log in
@@ -70,8 +70,8 @@ const AddPatient = () => {
 
         
         <br/><br/><br/>
-        <button type = "submit" className="inline-block px-7 py-3 bg-[#121212] uppercase text-white hover:border-[#1275B4] 
-        font-medium rounded shadow-md hover:bg-[#1275B4] border-[#121212] border-4 transition duration-150 ease-in-out">
+        <button type = "submit" className="inline-block px-7 py-3 bg-white border-[#121212] uppercase text-[#121212] hover:border-[#121212] 
+        font-medium rounded hover:text-white shadow-md hover:bg-[#121212] border-white border-2 transition duration-150 ease-in-out">
           register
         </button>
         </form>
