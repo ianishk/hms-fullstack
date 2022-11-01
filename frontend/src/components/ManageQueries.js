@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react'
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import EditQuery from './EditQuery';
+import ViewRole from './ViewRole';
 const ManageQueries = () => {
   const location = useLocation();
   const [query,setQuery]=useState([]);
@@ -95,7 +96,8 @@ const ManageQueries = () => {
                                 </div>
                                 </td>
                                 <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <h6 className="mb-0 leading-normal text-sm">{item.patient}</h6>
+                                {/* <h6 className="mb-0 leading-normal text-sm">{item.patient}</h6> */}
+                                <ViewRole id={item.patient}/>
                                 </td>
                                 <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                 <h6 className="mb-0 leading-normal text-sm">{item.query}</h6>

@@ -152,4 +152,13 @@ router.get('/',async(req,res)=>{
             console.log(err.message);
         }
 })
+
+router.get('/:outpatient_id',async(req,res)=>{
+    try {
+        const outpatient=await OutPatient.findById({_id:req.params.outpatient_id});
+        res.json(outpatient);
+    } catch (err) {
+        console.log(err.message);
+    }
+})
 module.exports=router;

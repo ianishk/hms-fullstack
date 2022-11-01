@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import ViewRole from './ViewRole';
 const RaiseQuery = () => {
   const location = useLocation();
   // console.log(location);
@@ -92,7 +93,8 @@ const RaiseQuery = () => {
                                 </div>
                                 </td>
                                 <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <h6 className="mb-0 leading-normal text-sm">{item.patient}</h6>
+                                {/* <h6 className="mb-0 leading-normal text-sm">{item.patient}</h6> */}
+                                <ViewRole id={item.patient}/>
                                 </td>
                                 <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                 <h6 className="mb-0 leading-normal text-sm">{item.query}</h6>

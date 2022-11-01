@@ -52,7 +52,7 @@ router.get("/",  async (req, res) => {
 
 router.get("/:room_no",  async (req, res) => {
   try {
-    let room = await Room.findOne({ roomNo: req.params.room_no });
+    let room = await Room.findOne({ _id: req.params.room_no });
     res.status(200).json(room);
   } catch (err) {
     console.log(err.message);

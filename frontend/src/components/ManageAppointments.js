@@ -4,6 +4,8 @@ import pictblack from "./logos/main_logo_black.svg";
 import React,{useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import ViewRole from "./ViewRole";
+
 const ManageAppointments = () => {
   const location = useLocation();
   // console.log(location);
@@ -133,10 +135,11 @@ const ManageAppointments = () => {
                                     <h6 className="mb-0 leading-normal text-sm">{item.symptoms}</h6>
                                     </td>
                                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                    <h6 className="mb-0 leading-normal text-sm">{item.patient}</h6>
+                                    {/* <h6 className="mb-0 leading-normal text-sm">{item.patient}</h6> */}
+                                    <ViewRole id={item.patient}/>
                                     </td>
                                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                    <h6 className="mb-0 leading-normal text-sm">{item.doctor}</h6>
+                                    <ViewRole id={item.doctor}/>
                                     </td>
                                     {/* <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <h6 className="mb-0 leading-normal text-sm">{item.receptionist}</h6>
