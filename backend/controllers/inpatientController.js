@@ -142,6 +142,8 @@ router.post('/login',
             const isMatch=await bcrypt.compare(password,inpatient.password);
             if(!isMatch)return res.status(400).json({error:[{msg:'Invalid credentials'}]});
             //return json web token
+            inpatient.count += 1
+            await inpatient.save()
             const payload={
                 user:{
                     id:inpatient.id
