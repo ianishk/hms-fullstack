@@ -40,6 +40,9 @@ const Login = () => {
             if(loginInput.userType==='outpatient'){
                 navigate('/outpatient/1');
             }
+            if(loginInput.userType==='admin'){
+                navigate('/admin/1');
+            }
         })
     }
   return (
