@@ -5,14 +5,14 @@ import EditQuery from './EditQuery';
 import ViewRole from './ViewRole';
 const ManageQueries = () => {
   const location = useLocation();
-  const [query,setQuery]=useState([]);
+  let [query,setQuery]=useState([]);
   // console.log(JSON.parse(localStorage.user).token);
   useEffect(()=>{
       fetch(`http://localhost:5000/api/queries`,{headers:{'Content-Type':'application/json'}}).then((data) => data.json() ).then((val) => {
         setQuery(val);
       })
   },[])
-  
+  query=query.filter(item=>item.status===false);
 //   console.log(query);
   // console.log(location);
   const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');

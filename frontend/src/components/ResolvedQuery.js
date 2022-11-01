@@ -7,13 +7,14 @@ const ResolvedQuery = () => {
   // console.log(location);
   const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
   // console.log(l);  
-  const [query,setQuery]=useState([]);
+  let [query,setQuery]=useState([]);
   // console.log(JSON.parse(localStorage.user).token);
   useEffect(()=>{
       fetch(`http://localhost:5000/api/queries`,{headers:{'Content-Type':'application/json'}}).then((data) => data.json() ).then((val) => {
         setQuery(val);
       })
   },[]);
+  query=query.filter(item=>item.status==true);
   const deleteQuery=(id)=>{
     fetch(`http://localhost:5000/api/queries/${id}`, {
         method: "DELETE",
@@ -40,7 +41,7 @@ const ResolvedQuery = () => {
                 <div className="p-2 pb-0 mb-0 bg-white border-1 border-b-solid rounded border-black">
                     <h6 className="text-2xl uppercase">Queries</h6>
                     <br/>
-                    <Link to={"/"+l+"/AddQuery"}  className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">ADD</Link>
+                    {/* <Link to={"/"+l+"/AddQuery"}  className="font-semibold leading-tight text-xs rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">ADD</Link> */}
                 </div>
                 <br/>
                 <div className="flex-auto px-0 pt-0 pb-2">
