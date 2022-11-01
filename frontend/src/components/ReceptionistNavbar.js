@@ -27,6 +27,9 @@ export default function ReceptionistNavbar() {
                         <Link to="/receptionist/ManageQueries">Queries</Link>                          
                         </li>
                         <li className="mt-0.5 w-full rounded border-black border-2 bg-white text-black py-3 mr-2 text-xl flex justify-center place-items-center whitespace-nowrap px-4 transition duration-300 hover:bg-black hover:text-white">
+                            <Link to="/receptionist/ResolvedQuery">Resolved Queries</Link>
+                        </li>
+                        <li className="mt-0.5 w-full rounded border-black border-2 bg-white text-black py-3 mr-2 text-xl flex justify-center place-items-center whitespace-nowrap px-4 transition duration-300 hover:bg-black hover:text-white">
                         <Link to="/receptionist/ManageRooms">Rooms</Link>                          
                         </li>
                         <li className="mt-0.5 w-full rounded border-black border-2 bg-white text-black py-3 mr-2 text-xl flex justify-center place-items-center whitespace-nowrap px-4 transition duration-300 hover:bg-black hover:text-white">
@@ -40,7 +43,7 @@ export default function ReceptionistNavbar() {
                         </li> */}
                         <li>
                         <Link to="/login">
-                        <button onClick={()=>onclick()} className="ml-[710px] bg-white rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">
+                        <button onClick={()=>onclick()} className="ml-[680px] bg-white rounded border-black border-2 px-3 py-3 transition duration-300 hover:bg-black hover:text-white">
                             LOGOUT
                         </button>
                         </Link>
