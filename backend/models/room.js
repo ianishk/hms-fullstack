@@ -13,6 +13,11 @@ const room = Schema({
     pricePerDay: {
         type: Number,
         required: true
+    },
+    booked:{
+        type:Boolean,
+        required: true,
+        default: false
     }
 })
 
