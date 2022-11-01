@@ -28,7 +28,11 @@ const inPatientSchema = mongoose.Schema({
   },
   bookedRooms: {
     type: Number,
-  }
+  },
+  count:{
+    type: Number,
+    default: 0,
+  },
 });
 
 let inPatient = mongoose.model("inPatient", inPatientSchema);

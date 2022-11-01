@@ -26,6 +26,10 @@ const outPatientSchema = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  count:{
+    type: Number,
+    default: 0,
+  },
 });
 
 let outPatient = mongoose.model("outPatient", outPatientSchema);
