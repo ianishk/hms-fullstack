@@ -1,8 +1,9 @@
 POST http://localhost:5000/api/rooms/room
-Content-Type: "application/json"
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDliYjhjYmZjM2Q4MTlhYTgyMDljIn0sImlhdCI6MTY2NzI4MjQ3MywiZXhwIjoxNjY3Mjg2MDczfQ.yZ3r_6CW5LSA0YdxQqPRo7Sz87AiT9ZRt92IwEE7WGI
 
 {
-    "roomNo":"100",
+    "roomNo":"101",
     "block": "B",
     "pricePerDay":"1000"
 }
@@ -20,3 +21,68 @@ Content-Type: application/json
     "phone": "1234543",
     "address": "india"
 }
+
+###
+
+POST http://localhost:5000/api/receptionist/login/
+Content-Type: application/json
+
+{
+    "email":"abs@test.com",
+    "password":"123456"
+}
+
+###
+
+POST http://localhost:5000/api/patient/signup/
+Content-Type: application/json
+
+{
+    "name":"patient1",
+    "email":"patient@gmail.com",
+    "password":"123456",
+    "age":"30",
+    "gender":"male",
+    "address":"somewhere",
+    "phoneNo":"98232848"
+}
+
+###
+POST http://localhost:5000/api/patient/login/
+Content-Type: application/json
+
+{
+    "email":"patient@gmail.com",
+    "password":"123456"
+}
+
+###
+
+GET http://localhost:5000/api/rooms/
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDliYjhjYmZjM2Q4MTlhYTgyMDljIn0sImlhdCI6MTY2NzI4MTAwOSwiZXhwIjoxNjY3Mjg0NjA5fQ.AJYHBUtl3WQRz39_OFbxx8Vh1b6XiEG2Q5jco0QzdbE
+
+###
+
+GET http://localhost:5000/api/rooms/left
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDliYjhjYmZjM2Q4MTlhYTgyMDljIn0sImlhdCI6MTY2NzI4MTAwOSwiZXhwIjoxNjY3Mjg0NjA5fQ.AJYHBUtl3WQRz39_OFbxx8Vh1b6XiEG2Q5jco0QzdbE
+
+
+###
+
+POST http://localhost:5000/api/bookedRoom/
+Content-Type: application/json
+
+{
+    "from":"2019-04-28T14:45:15",
+    "price":"1000",
+    "to":"2019-04-28T14:45:15",
+    "patient":"63613eabf7020389008f7065",
+    "room":"63609e47424401e895be4a99",
+    "paid":"false"
+}
+
+###
+GET http://localhost:5000/api/bookedRoom/
+
+###
+DELETE  http://localhost:5000/api/bookedRoom/63614534f3875d82691348b0
