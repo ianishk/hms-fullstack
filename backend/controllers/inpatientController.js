@@ -125,16 +125,16 @@ router.get('/:inpatient_id',async (req,res)=>{
 });
 
 router.post('/login',
-    check('email','Email required').isEmail(),
+    check('phone','phone required').notEmpty(),
     check('password','Password required').notEmpty(),
     async (req,res)=>{
         errors=validationResult(req);
         if(!errors.isEmpty()){
             return res.status(400).json({errors:errors.array()});
         }
-        const {email,password}=req.body;
+        const {phone,password}=req.body;
         try {
-            let inpatient=await Inpatient.findOne({email});
+            let inpatient=await Inpatient.findOne({phone});
             if(!inpatient){
                 return res.status(400).json({error:[{msg:'Invalid credentials'}]});
             }

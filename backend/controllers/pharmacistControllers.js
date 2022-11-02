@@ -66,7 +66,7 @@ router.get('/:pharmacist_id',async (req,res)=>{
         }
     });
 router.post('/login',
-    check('email','email is required').isEmail(),
+    check('phone','phone is required').notEmpty(),
     check('password','password is required').notEmpty(),
     async(req,res)=>{
         errors=validationResult(req);
@@ -74,14 +74,14 @@ router.post('/login',
             return res.status(400).json({errors:errors.array()});
         }
 
-        const {email,password}=req.body;
+        const {phone,password}=req.body;
         try {
-            const pharmacist=await Pharmacist.findOne({email});
+            const pharmacist=await Pharmacist.findOne({phone});
             if(!pharmacist){
                 return res.status(400).json({error:[{msg:'Invalid credentials'}]});
             }
             
-            const isMatch=await bcrypt.compare(password,doctor.password);
+            const isMatch=await bcrypt.compare(password,pharmacist.password);
             if(!isMatch)return res.status(400).json({error:[{msg:'Invalid credentials'}]});
             //return json web token
             const payload={

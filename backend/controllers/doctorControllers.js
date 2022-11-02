@@ -61,7 +61,7 @@ router.get('/',async(req,res)=>{
 
 
 router.post('/login',
-    check('email','email is required').isEmail(),
+    check('phone','phone is required').notEmpty(),
     check('password','password is required').notEmpty(),
     async(req,res)=>{
         errors=validationResult(req);
@@ -69,9 +69,9 @@ router.post('/login',
             return res.status(400).json({errors:errors.array()});
         }
 
-        const {email,password}=req.body;
+        const {phone,password}=req.body;
         try {
-            const doctor=await Doctor.findOne({email});
+            const doctor=await Doctor.findOne({phone});
             if(!doctor){
                 return res.status(400).json({error:[{msg:'Invalid credentials'}]});
             }

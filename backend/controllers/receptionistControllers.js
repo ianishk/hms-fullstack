@@ -66,16 +66,16 @@ router.get('/:receptionist_id',async (req,res)=>{
 );
 
 router.post('/login',
-    check('email','Email required').isEmail(),
+    check('phone','phone required').notEmpty(),
     check('password','Password required').notEmpty(),
     async (req,res)=>{
         errors=validationResult(req);
         if(!errors.isEmpty()){
             return res.status(400).json({errors:errors.array()});
         }
-        const {email,password}=req.body;
+        const {phone,password}=req.body;
         try {
-            let receptionist=await Receptionist.findOne({email});
+            let receptionist=await Receptionist.findOne({phone});
             if(!receptionist){
                 return res.status(400).json({error:[{msg:'Invalid credentials'}]});
             }

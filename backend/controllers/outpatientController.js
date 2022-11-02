@@ -66,16 +66,16 @@ router.delete('/:inpatient_id',async (req,res)=>{
 });
 
 router.post('/login',
-    check('email','Email required').isEmail(),
+    check('phone','phone required').notEmpty(),
     check('password','Password required').notEmpty(),
     async (req,res)=>{
         errors=validationResult(req);
         if(!errors.isEmpty()){
             return res.status(400).json({errors:errors.array()});
         }
-        const {email,password}=req.body;
+        const {phone,password}=req.body;
         try {
-            let outpatient=await OutPatient.findOne({email});
+            let outpatient=await OutPatient.findOne({phone});
             if(!outpatient){
                 return res.status(400).json({error:[{msg:'Invalid credentials'}]});
             }
