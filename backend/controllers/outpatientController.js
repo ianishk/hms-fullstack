@@ -12,9 +12,9 @@ router.post(
     check('name','name is required').not().isEmpty(),
     check('email','email is required').isEmail(),
     check('password','password is required').notEmpty(),
-    check('age','age is required').notEmpty(),
+    // check('age','age is required').notEmpty(),
     check('phone','phone is required').notEmpty(),
-    check('bookedRooms','room is required').notEmpty(),
+    // check('bookedRooms','room is required').notEmpty(),
     check('address','address is required').notEmpty(),
     check('gender','gender is required').notEmpty()
     ,

@@ -9,6 +9,7 @@ const ViewPrescription = ({data}) => {
   const [newData,setNewData]=useState(data.Prescription);
   const l = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
 //   console.log(l);    
+console.log(newData);
     const onchange=(e)=>{
         setSearch(e.target.value);
     }

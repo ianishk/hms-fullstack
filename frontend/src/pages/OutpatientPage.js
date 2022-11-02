@@ -15,7 +15,8 @@ const OutpatientPage = () => {
     let data ={
       "Prescription" :[
         {
-          "name":"John Doe",
+          "patient":"John Doe",
+          "doctor":"Doe John",
           "medicine":"Crocin 500mg",
           "instructions":"0-1-1 after food"
         }
