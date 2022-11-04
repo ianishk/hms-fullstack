@@ -18,6 +18,7 @@ router.post("/:doctor_id", async (req, res) => {
       instructions,
     });
     await prescription.save();
+    console.log(prescription);
     res.json(prescription);
   } catch (error) {
     console.log(error.message);
@@ -33,27 +34,22 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.update("/:doctor_id", async (req, res) => {
+router.patch("/:doctor_id", async (req, res) => {
     try {
         const { patient, medicine, instructions } = req.body;
         const prescription = await Prescription.findOne({doctor: req.params.doctor_id});
         if (!prescription) return res.status(400).json({ msg: "No prescription found" });
-        const fields = {};
         if (patient.length != 0) {
-            fields.patient = patient;
+            prescription.patient = patient;
         }
         if (medicine.length != 0) {
-            fields.medicine = medicine;
+            prescription.medicine = medicine;
         }
         if (instructions.length != 0) {
-            fields.instructions = instructions;
+            prescription.instructions = instructions;
         }
-        prescription = await Prescription.findOneAndUpdate(
-            { doctor: req.params.doctor_id },
-            { $set: fields },
-            { new: true }
-        );
-        res.json(prescription);
+        let new_prescription = await prescription.save(); 
+        res.json(new_prescription);
     } catch (error) {
         console.log(error.message);
     }

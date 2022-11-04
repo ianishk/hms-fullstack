@@ -28,9 +28,9 @@ const ManagePrescription = () => {
         console.log('qweqwe');
         fetch(`http://localhost:5000/api/prescription/${id}`, {
             method: "DELETE",
-            headers: {
-                'x-auth-token':JSON.parse(localStorage.user).token,
-            }
+            // headers: {
+            //     'x-auth-token':JSON.parse(localStorage.user).token,
+            // }
         }).then((data) => data.json() ).then((val) => {
             console.log(val);
         })
